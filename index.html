@@ -1,12 +1,182 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Basic HTML Page</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lexique — 250 mots (démo 60 mots)</title>
+  <style>
+    :root{
+      --bg:#0f172a; --card:#111827; --muted:#9ca3af; --accent:#60a5fa;
+      --glass: rgba(255,255,255,0.03);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#071233 0%, #081326 100%);color:#e6eef8;}
+    .wrap{max-width:1100px;margin:32px auto;padding:24px;}
+    header{display:flex;align-items:center;gap:16px;margin-bottom:20px;}
+    h1{margin:0;font-size:1.6rem}
+    p.lead{margin:4px 0 0;color:var(--muted)}
+    .controls{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}
+    input[type="search"]{
+      padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);
+      background:var(--glass);color:inherit;outline:none;width:320px;
+    }
+    select{padding:10px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.06);color:inherit}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.03)}
+    .word{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.03rem}
+    .pos{font-size:0.85rem;color:var(--muted);margin-left:auto}
+    .def{margin:8px 0;color:#dbeafe}
+    .ex{margin:6px 0;color:var(--muted);font-style:italic}
+    .note{font-size:0.85rem;color:#9fd0ff}
+    footer{margin-top:18px;color:var(--muted);font-size:0.9rem}
+    .badge{background:rgba(96,165,250,0.12);padding:6px 8px;border-radius:999px;color:var(--accent);font-weight:600}
+    .emoji{font-size:1.2rem}
+    @media (max-width:420px){input[type="search"]{width:100%}}
+  </style>
 </head>
 <body>
-    <h1>Welcome to My Website projet-test!</h1>
-    <p>This is a simple paragraph within the body of the HTML document image.</p>
+  <div class="wrap">
+    <header>
+      <div>
+        <div class="badge">📚 Lexique pour enseignant·e·s</div>
+        <h1>Lexique — mots complexes (démo 60/250) <span style="font-size:.8rem;color:var(--muted)">🇫🇷</span></h1>
+        <p class="lead">Définitions brèves, exemples d'usage et remarques pédagogiques — sans images, juste des emojis pour l'animation ✨</p>
+      </div>
+    </header>
+
+    <div class="controls">
+      <input id="search" type="search" placeholder="🔎 Rechercher mot, définition ou usage..." />
+      <select id="filter">
+        <option value="all">🔀 Tous</option>
+        <option value="n">Nom</option>
+        <option value="v">Verbe</option>
+        <option value="adj">Adjectif</option>
+        <option value="adv">Adverbe</option>
+      </select>
+      <button id="reset" style="padding:10px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)">🔄 Réinitialiser</button>
+    </div>
+
+    <main>
+      <section id="lexicon" class="grid" aria-live="polite">
+        <!-- Entrées générées ici -->
+      </section>
+    </main>
+
+    <footer>
+      <p>ℹ️ Cette page est une démo (60 mots). Si tu veux les 250 mots, je peux poursuivre et fournir un fichier complet prêt à publier.</p>
+      <p style="margin-top:6px">💡 Astuce : utilise la recherche pour trouver rapidement un mot. Les enseignants peuvent copier-coller les définitions et exemples dans leurs supports.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Données : mots, nature (n,v,adj,adv), définition courte, exemple, note d'usage
+    const LEX = [
+/* 60 entrées de démonstration — chaque objet : [mot, nature, définition, exemple, note] */
+["abjurer","v","Renoncer publiquement à une croyance, une opinion ou une pratique.","Il abjura ses erreurs devant l'assemblée.","Terme fort, souvent historique/religieux. 🙏"],
+["abroger","v","Annuler une loi ou une règle.","Le gouvernement a abrogé la loi la plus contestée.","Usage juridique/administratif. ⚖️"],
+["acception","n","Sens particulier d'un mot selon le contexte.","Dans cette acception, 'poste' signifie 'emploi'.","Utile pour travailler la polysémie. 🔍"],
+["acquiescer","v","Accepter, donner son accord de façon silencieuse ou tacite.","Elle acquiesça d'un signe de tête.","Formel; utilisé en textes soignés. ✅"],
+["acrimonie","n","Aigreur dans le ton ou les propos.","Le débat s'est déroulé avec acrimonie.","Mot soutenu, utile en analyse de discours. 🔥"],
+["adjuvant","n","Ce qui aide, renforce un effet — souvent médical/pharmaceutique.","Un adjuvant améliore la réponse du vaccin.","Vocabulaire scientifique/technique. 🧪"],
+["adjuger","v","Attribuer officiellement (souvent un marché) à quelqu'un.","La ville a adjugé le contrat à l'entreprise locale.","Terme administratif/juridique. 📜"],
+["afférent","adj","Qui se rapporte à, qui concerne.","Les documents afférents au dossier.","Formel; très utile pour rédaction administrative. 🗂️"],
+["affleurer","v","Apparaître à la surface de façon discrète.","La mémoire de cet événement affleure parfois.","Verbe élégant pour descriptions littéraires. 🌊"],
+["agogique","adj","Relatif à l'intonation ou au tempo (musique) — aussi fig. intensité.","Une reprise agogique met l'accent sur le rythme.","Terme musical mais employable en figuration. 🎼"],
+["aléa","n","Événement imprévu pouvant influencer un résultat.","L'aléa climatique a retardé le chantier.","Très utilisé en risques/projets. 🌪️"],
+["aliénation","n","Perte de liberté/identité; aussi transfert de propriété.","L'aliénation sociale se manifeste par l'isolement.","Mot de portée sociologique/juridique. 🧩"],
+["alléguer","v","Avancer comme preuve ou raison (parfois sans preuve).","Il a allégué un empêchement.","S'emploie souvent dans le langage judiciaire. 🏛️"],
+["ambivalent","adj","Qui manifeste deux tendances opposées.","Sa réaction est ambivalente, entre joie et doute.","Très utile pour analyser attitudes. ⚖️"],
+["amphigourique","adj","Confus, obscur par excès de mots.","Un discours amphigourique qui embrouille.","Mot littéraire pour critiquer le style. 🌀"],
+["anachronisme","n","Erreur de chronologie; idée déplacée dans le temps.","Placer un smartphone au XIXe siècle est un anachronisme.","Bon pour travaux d'histoire/littérature. ⏳"],
+["anathème","n","Condamnation solennelle; outrage moral.","Il a été frappé d'anathème par ses pairs.","Très fort; emploi religieux/morale. ⚠️"],
+["ancillaire","adj","Qui est accessoire ou subordonné à quelque chose.","Services ancillaires à l'hôpital.","Terme administratif/économique. 🏥"],
+["anéantir","v","Rendre totalement inefficace ou détruire.","La tempête a anéanti les cultures.","Mot fort; utile en descriptif dramatique. 🌩️"],
+["anodin","adj","Sans importance, insignifiant.","Une remarque anodine qui a surpris tout le monde.","Attention : usage ironique fréquent. 🤏"],
+["antinomie","n","Contradiction entre deux lois ou principes.","On relève une antinomie entre les deux articles.","Terme philosophique/juridique. ⚔️"],
+["apathie","n","Absence d'énergie, indifférence.","Son apathie inquiétait ses proches.","Bon pour psychologie/social. 🛌"],
+["apogée","n","Point culminant, sommet d'une réussite.","Le film a connu son apogée au festival.","Mot courant, registre soutenu. 🏔️"],
+["apostasie","n","Abandon d'une religion ou d'une croyance.","Il fut accusé d'apostasie après ses écrits.","Terme religieux, très fort. ✝️"],
+["arbitraire","adj","Fondé sur le caprice plutôt que sur la règle.","Décision arbitraire et contestée.","Utile pour débats sur justice/équité. 🎲"],
+["argutie","n","Argument subtil mais souvent sophistique.","L'enseignant a dénoncé l'argutie de l'élève.","Terme critique pour raisonnement fallacieux. 🧠"],
+["artéfact","n","Objet fabriqué; en sciences, résultat non naturel d'une mesure.","L'artefact perturbe les observations.","Très utilisé en sciences/archéologie. 🔬"],
+["assentiment","n","Consentement donné de manière formelle.","Nous avons obtenu l'assentiment des partenaires.","Formel, administratif. ✔️"],
+["atavique","adj","Qui remonte aux ancêtres; archaïque.","Réaction atavique à la peur.","Mot utile en sciences humaines. 🧬"],
+["atavisme","n","Réapparition de caractères ancestraux.","L'atavisme s'explique par la génétique.","Terme biologique et figuré. 🌿"],
+["audace","n","Courage risqué; caractère innovant.","Son audace a changé la direction du projet.","Positif en création/entrepreneuriat. 🚀"],
+["autarcie","n","État d'une économie autosuffisante.","L'autarcie est rarement complète aujourd'hui.","Terme économique/politique. 🏝️"],
+["austère","adj","Sévere, dépouillé, sans ornement.","Un style austère mais élégant.","Style littéraire ou description de lieu. ❄️"],
+["avéré","adj","Qui est prouvé, confirmé.","Une augmentation avérée des températures.","Utilisé pour rapports et preuves. 🔎"],
+["balbutier","v","Parler avec hésitation.","Il balbutia quelques mots en arrivant.","Description d'émotion ou trouble. 🗣️"],
+["belliqueux","adj","Porté à la guerre ou à la dispute.","Un ton belliqueux dans les échanges.","Souvent employé en politique/diplomatie. ⚔️"],
+["bifurcation","n","Division en deux directions.","La bifurcation du chemin nous a perdus.","Technique : urbanisme/données. ↗️↘️"],
+["cacophonie","n","Ensemble de sons discordants; désordre sonore.","La rue était une cacophonie de klaxons.","Mot imagé pour critique sonore/textuelle. 🔊"],
+["caduc","adj","Qui a perdu sa valeur, périmé.","Un contrat devenu caduc.","Terme juridique/administratif. 🧾"],
+["calamité","n","Grand malheur; catastrophe.","La sécheresse fut une calamité pour la région.","Langage littéraire/historique. 🌾"],
+["capricieux","adj","Sujet à des changements brusques et imprévisibles.","Temps capricieux du printemps.","Souvent utilisé pour météo / comportements. ☁️"],
+["censure","n","Contrôle interdisant la diffusion d'une œuvre.","La censure a supprimé certaines scènes.","Sujet sensible en médias et histoire. ✂️"],
+["conjecture","n","Hypothèse élaborée sans preuve complète.","Sa théorie reste une conjecture.","Utile en méthodologie/sciences humaines. 🧩"],
+["conjoncture","n","Ensemble des circonstances économiques/sociales.","La conjoncture actuelle est favorable.","Utilisé en économie et analyse sociale. 📈"],
+["contigu","adj","Qui touche physiquement; adjacent.","Les deux bâtiments sont contigus.","Terme spatial, utile en géographie/architecture. 🧭"],
+["contrevenant","n","Personne qui viole une règle ou loi.","Le contrevenant a été verbalisé.","Terme administratif/juridique. 🚨"],
+["corroborer","v","Renforcer une affirmation par des éléments nouveaux.","Les témoignages corroborent son récit.","Verbe précieux pour preuve/argumentation. 🔗"],
+["cupide","adj","Qui cherche l'argent avec avidité.","Un personnage cupide et sans scrupules.","Usage moral/critique littéraire. 💰"],
+["déférence","n","Respect poli envers quelqu'un.","Il s'inclina par déférence.","Terme utilisé pour comportement social soigné. 🙇"],
+["déplorer","v","Regretter vivement, condamner.","On déplore la perte du patrimoine.","Formel, souvent dans communiqués. 😔"],
+["désuet","adj","Qui est passé de mode; archaïque.","Un mot aujourd'hui désuet.","Utile pour études linguistiques/évolution. 🕰️"],
+["dialectique","n","Méthode de raisonnement par contradiction; rapport entre forces.","La dialectique maître/élève évolue.","Terme philosophique et critique. 🔁"],
+["dichotomie","n","Division nette en deux parties opposées.","La dichotomie public/privé est discutée.","Très utile en analyse conceptuelle. ↔️"],
+["diligent","adj","Qui agit avec soin et promptitude.","Un élève diligent et organisé.","Compliment courant dans évaluations. ✍️"],
+["dissonance","n","Absence d'harmonie; contradiction.","Il y a une dissonance entre parole et acte.","Utile en musique et rhétorique. 🎶"],
+["dubitatif","adj","Qui doute; sceptique.","Il resta dubitatif face aux promesses.","Ton utile en commentaire critique. 🤨"],
+["effleurer","v","Toucher légèrement; mentionner sans approfondir.","Le sujet fut à peine effleuré.","Verbe fin pour style narratif. 🖐️"],
+["éloquent","adj","Qui persuade par la force de l'expression.","Un discours éloquent et convaincant.","Qualificatif appréciable en communication. 🗨️"],
+["éluder","v","Éviter habilement une question ou obligation.","Il a éludé la question lors de l'entretien.","Verbe utile pour critique politique/juridique. 🎭"],
+["éphémère","adj","Qui ne dure que très peu.","La beauté éphémère des fleurs de cerisier.","Mot littéraire fréquent. 🌸"]
+    ];
+
+    // création des cartes
+    const container = document.getElementById('lexicon');
+    function render(list){
+      container.innerHTML = '';
+      list.forEach(item=>{
+        const [mot,nat,def,ex,note] = item;
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="word"><span class="emoji">📘</span><span>${mot}</span><span class="pos">${nat}</span></div>
+          <div class="def">${def}</div>
+          <div class="ex">✏️ Exemple : ${ex}</div>
+          <div class="note">💡 Usage : ${note}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+    render(LEX);
+
+    // recherche + filtre
+    const search = document.getElementById('search');
+    const filter = document.getElementById('filter');
+    const reset = document.getElementById('reset');
+
+    function applyFilters(){
+      const q = search.value.trim().toLowerCase();
+      const f = filter.value;
+      const filtered = LEX.filter(([mot,nat,def,ex,note])=>{
+        if(f !== 'all' && nat !== f) return false;
+        if(!q) return true;
+        return (mot + ' ' + def + ' ' + ex + ' ' + note).toLowerCase().includes(q);
+      });
+      render(filtered);
+    }
+
+    search.addEventListener('input', applyFilters);
+    filter.addEventListener('change', applyFilters);
+    reset.addEventListener('click', ()=>{
+      search.value=''; filter.value='all'; render(LEX);
+    });
+
+    // accessibilité: focus sur la recherche
+    search.focus();
+  </script>
 </body>
 </html>
