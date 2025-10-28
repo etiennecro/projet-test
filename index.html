@@ -1,74 +1,102 @@
-<!doctype html>
+ <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Lexique pharmaceutique — 50 mots essentiels</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💊 Lexique pharmaceutique</title>
   <style>
-    :root{
-      --bg:#005c3c; 
-      --card:#014f34; 
-      --muted:#c9f0d0;
-      --accent:#7efbaf;
-      --glass: rgba(255,255,255,0.05);
-      font-family: "Segoe UI", Inter, system-ui, sans-serif;
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #013220;
+      color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
     }
-    html,body{height:100%;margin:0;background-color:var(--bg);color:#ecfdf5;}
-    .wrap{max-width:1100px;margin:32px auto;padding:24px;}
-    header{margin-bottom:20px;}
-    h1{margin:0;font-size:1.8rem}
-    p.lead{margin:6px 0 0;color:var(--muted);font-size:1rem}
-    .controls{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}
-    input[type="search"], select, button{
-      padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);
-      background:var(--glass);color:inherit;outline:none;
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      border-bottom: 2px solid #32cd81;
     }
-    input[type="search"]{width:320px;}
-    button{cursor:pointer}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,0.04);}
-    .word{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem}
-    .pos{font-size:0.85rem;color:var(--muted);margin-left:auto}
-    .def{margin:8px 0;color:#d1fae5}
-    .ex{margin:6px 0;color:#a7f3d0;font-style:italic}
-    .note{font-size:0.85rem;color:#7efbaf}
-    footer{margin-top:24px;color:var(--muted);font-size:0.9rem}
-    .badge{background:rgba(126,251,175,0.1);padding:6px 10px;border-radius:999px;color:var(--accent);font-weight:600}
-    .emoji{font-size:1.3rem}
-    @media (max-width:420px){input[type="search"]{width:100%}}
+
+    h1 {
+      color: #32cd81;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    input {
+      width: 80%;
+      max-width: 500px;
+      padding: 0.7rem;
+      border-radius: 10px;
+      border: none;
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+
+    main {
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background-color: #024731;
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+    }
+
+    h2 {
+      color: #32cd81;
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .emoji {
+      font-size: 1.6rem;
+      margin-right: 0.4rem;
+    }
+
+    .definition {
+      font-weight: bold;
+      margin-top: 0.5rem;
+    }
+
+    .example {
+      font-style: italic;
+      margin-top: 0.5rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #88e0b1;
+      border-top: 1px solid #32cd81;
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="badge">⚕️ Lexique pharmaceutique</div>
-      <h1>💊 50 mots essentiels du domaine pharmaceutique</h1>
-      <p class="lead">Définitions, exemples et usages pédagogiques destinés aux enseignants et étudiants en pharmacie 🧪🩺</p>
-    </header>
+  <header>
+    <h1>💊 Lexique pharmaceutique</h1>
+    <p>Un outil pour enrichir votre vocabulaire professionnel et scientifique 🧪⚕️</p>
+    <input type="text" id="search" placeholder="🔍 Rechercher un terme..." />
+  </header>
 
-    <div class="controls">
-      <input id="search" type="search" placeholder="🔎 Rechercher un terme, une définition ou un usage..." />
-      <select id="filter">
-        <option value="all">Tous</option>
-        <option value="n">Nom</option>
-        <option value="v">Verbe</option>
-        <option value="adj">Adjectif</option>
-      </select>
-      <button id="reset">🔄 Réinitialiser</button>
-    </div>
+  <main id="lexique"></main>
 
-    <main>
-      <section id="lexicon" class="grid"></section>
-    </main>
-
-    <footer>
-      <p>💡 Ce lexique a été conçu pour illustrer les mots techniques et conceptuels utilisés dans le champ pharmaceutique et biomédical.</p>
-      <p>📘 Auteur : Équipe pédagogique pharmaceutique — © 2025</p>
-    </footer>
-  </div>
-
-  <script>
+  <footer>
+    🧫 Créé pour les enseignants et étudiants en pharmacie — © 2025 LexiPharma
+  </footer>
+ <script>
     const LEX = [
 ["absorption","n","Processus par lequel une substance pénètre dans la circulation sanguine à partir d’un site d’administration.","L’absorption intestinale des médicaments peut être influencée par la nourriture.","Terme fondamental en pharmacocinétique. 💊"],
 ["acétylcholine","n","Neurotransmetteur impliqué dans la contraction musculaire et la transmission nerveuse.","Certains médicaments inhibent la dégradation de l’acétylcholine pour traiter la maladie d’Alzheimer.","Important en pharmacologie du système nerveux. 🧠"],
@@ -156,3 +184,29 @@
   </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
