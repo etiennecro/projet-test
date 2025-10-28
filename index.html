@@ -1,154 +1,126 @@
- <!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>💊 Lexique pharmaceutique</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lexique pharmaceutique — 50 mots essentiels</title>
   <style>
-    body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      background-color: #013220;
-      color: #f4f4f4;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
+    :root{
+      --bg:#013220; 
+      --card:#014f34; 
+      --muted:#c9f0d0;
+      --accent:#32cd81;
+      --glass: rgba(255,255,255,0.05);
+      font-family: "Segoe UI", Inter, system-ui, sans-serif;
     }
-
-    header {
-      text-align: center;
-      padding: 2rem 1rem;
-      border-bottom: 2px solid #32cd81;
+    html,body{height:100%;margin:0;background-color:var(--bg);color:#f4f4f4;}
+    .wrap{max-width:1100px;margin:32px auto;padding:24px;}
+    header{margin-bottom:20px;}
+    h1{margin:0;font-size:1.8rem;color:#32cd81;}
+    p.lead{margin:6px 0 0;color:#f4f4f4;font-size:1rem}
+    .controls{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}
+    input[type="search"], select, button{
+      padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);
+      background:var(--glass);color:inherit;outline:none;
     }
-
-    h1 {
-      color: #32cd81;
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    input {
-      width: 80%;
-      max-width: 500px;
-      padding: 0.7rem;
-      border-radius: 10px;
-      border: none;
-      font-size: 1rem;
-      margin-top: 1rem;
-    }
-
-    main {
-      padding: 2rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .card {
-      background-color: #024731;
-      border-radius: 15px;
-      padding: 1.5rem;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-      transition: transform 0.2s;
-    }
-
-    .card:hover {
-      transform: scale(1.02);
-    }
-
-    h2 {
-      color: #32cd81;
-      font-size: 1.4rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .emoji {
-      font-size: 1.6rem;
-      margin-right: 0.4rem;
-    }
-
-    .definition {
-      font-weight: bold;
-      margin-top: 0.5rem;
-    }
-
-    .example {
-      font-style: italic;
-      margin-top: 0.5rem;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      color: #88e0b1;
-      border-top: 1px solid #32cd81;
-    }
+    input[type="search"]{width:320px;background:#ffffff;color:#013220;}
+    button{cursor:pointer}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,0.04);}
+    .word{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem;color:#32cd81;}
+    .pos{font-size:0.85rem;color:#f4f4f4;margin-left:auto}
+    .def{margin:8px 0;color:#f4f4f4}
+    .ex{margin:6px 0;color:#f4f4f4;font-style:italic}
+    .note{font-size:0.85rem;color:#32cd81}
+    footer{margin-top:24px;color:#f4f4f4;font-size:0.9rem}
+    .badge{background:rgba(50,205,129,0.1);padding:6px 10px;border-radius:999px;color:#32cd81;font-weight:600}
+    .emoji{font-size:1.3rem}
+    @media (max-width:420px){input[type="search"]{width:100%}}
   </style>
 </head>
 <body>
-  <header>
-    <h1>💊 Lexique pharmaceutique</h1>
-    <p>Un outil pour enrichir votre vocabulaire professionnel et scientifique 🧪⚕️</p>
-    <input type="text" id="search" placeholder="🔍 Rechercher un terme..." />
-  </header>
+  <div class="wrap">
+    <header>
+      <div class="badge">⚕️ Lexique pharmaceutique</div>
+      <h1>💊 50 mots essentiels du domaine pharmaceutique</h1>
+      <p class="lead">Définitions, exemples et usages pédagogiques destinés aux enseignants et étudiants en pharmacie 🧪🩺</p>
+    </header>
 
-  <main id="lexique"></main>
+    <div class="controls">
+      <input id="search" type="search" placeholder="🔎 Rechercher un terme, une définition ou un usage..." />
+      <select id="filter">
+        <option value="all">Tous</option>
+        <option value="n">Nom</option>
+        <option value="v">Verbe</option>
+        <option value="adj">Adjectif</option>
+      </select>
+      <button id="reset">🔄 Réinitialiser</button>
+    </div>
 
-  <footer>
-    🧫 Créé pour les enseignants et étudiants en pharmacie — © 2025 LexiPharma
-  </footer>
- <script>
+    <main>
+      <section id="lexicon" class="grid"></section>
+    </main>
+
+    <footer>
+      <p>💡 Ce lexique a été conçu pour illustrer les mots techniques et conceptuels utilisés dans le champ pharmaceutique et biomédical.</p>
+      <p>📘 Auteur : Équipe pédagogique pharmaceutique — © 2025</p>
+    </footer>
+  </div>
+
+  <script>
     const LEX = [
-["absorption","n","Processus par lequel une substance pénètre dans la circulation sanguine à partir d’un site d’administration.","L’absorption intestinale des médicaments peut être influencée par la nourriture.","Terme fondamental en pharmacocinétique. 💊"],
-["acétylcholine","n","Neurotransmetteur impliqué dans la contraction musculaire et la transmission nerveuse.","Certains médicaments inhibent la dégradation de l’acétylcholine pour traiter la maladie d’Alzheimer.","Important en pharmacologie du système nerveux. 🧠"],
-["adrénergique","adj","Qui agit sur les récepteurs sensibles à l’adrénaline ou à la noradrénaline.","Les médicaments adrénergiques augmentent la fréquence cardiaque.","Terme courant en pharmacodynamie. ⚡"],
+["absorption","n","Processus par lequel une substance pénètre dans la circulation sanguine à partir d'un site d'administration.","L'absorption intestinale des médicaments peut être influencée par la nourriture.","Terme fondamental en pharmacocinétique. 💊"],
+["acétylcholine","n","Neurotransmetteur impliqué dans la contraction musculaire et la transmission nerveuse.","Certains médicaments inhibent la dégradation de l'acétylcholine pour traiter la maladie d'Alzheimer.","Important en pharmacologie du système nerveux. 🧠"],
+["adrénergique","adj","Qui agit sur les récepteurs sensibles à l'adrénaline ou à la noradrénaline.","Les médicaments adrénergiques augmentent la fréquence cardiaque.","Terme courant en pharmacodynamie. ⚡"],
 ["antalgique","adj","Qui diminue ou supprime la douleur sans altérer la conscience.","Le paracétamol est un antalgique fréquemment utilisé.","Employé en pratique clinique et conseil officinal. 🩺"],
 ["antibiotique","n","Substance qui détruit ou empêche la croissance des bactéries.","Un antibiotique ne doit pas être prescrit pour une infection virale.","Mot clé de la santé publique et de la résistance bactérienne. 🧫"],
-["antidote","n","Substance capable de neutraliser un poison ou l’effet d’un médicament toxique.","Le charbon activé est parfois utilisé comme antidote en cas d’ingestion accidentelle.","Essentiel en toxicologie. ☠️"],
-["antihistaminique","n","Médicament qui bloque les effets de l’histamine et réduit les réactions allergiques.","Les antihistaminiques calment les démangeaisons et l’écoulement nasal.","Fréquent en automédication. 🌿"],
+["antidote","n","Substance capable de neutraliser un poison ou l'effet d'un médicament toxique.","Le charbon activé est parfois utilisé comme antidote en cas d'ingestion accidentelle.","Essentiel en toxicologie. ☠️"],
+["antihistaminique","n","Médicament qui bloque les effets de l'histamine et réduit les réactions allergiques.","Les antihistaminiques calment les démangeaisons et l'écoulement nasal.","Fréquent en automédication. 🌿"],
 ["antimicrobien","adj","Qui agit contre les micro-organismes pathogènes.","Les savons antimicrobiens sont utilisés pour désinfecter les mains.","Terme général englobant antibiotiques, antiviraux, antifongiques. 🧼"],
-["antioxydant","n","Substance qui empêche ou ralentit l’oxydation, protégeant les cellules.","La vitamine C est un antioxydant naturel.","Mot clé en nutrition et cosmétique. 🍊"],
+["antioxydant","n","Substance qui empêche ou ralentit l'oxydation, protégeant les cellules.","La vitamine C est un antioxydant naturel.","Mot clé en nutrition et cosmétique. 🍊"],
 ["antipyrétique","adj","Qui fait baisser la fièvre.","Le paracétamol a un effet antipyrétique.","Utilisé dans la gestion symptomatique. 🌡️"],
-["asepsie","n","Méthode visant à prévenir toute contamination microbienne d’un milieu.","Les instruments chirurgicaux doivent être utilisés dans des conditions d’asepsie parfaite.","Principe central en pratique hospitalière. 🧴"],
-["biodisponibilité","n","Proportion d’un médicament qui atteint la circulation systémique et peut agir.","La biodisponibilité d’un comprimé dépend de sa dissolution et de l’absorption intestinale.","Concept de base en pharmacocinétique. 📈"],
-["biotransformation","n","Modification chimique d’un médicament par l’organisme, souvent au niveau du foie.","La biotransformation convertit le médicament en métabolites actifs ou inactifs.","Notion clé pour le dosage thérapeutique. 🧪"],
-["cachet","n","Ancien type de forme orale contenant une poudre médicamenteuse entre deux feuilles d’amidon.","Les cachets ont été remplacés par les comprimés modernes.","Terme historique encore présent dans certains textes. 📦"],
-["capsule","n","Forme pharmaceutique contenant une substance active dans une enveloppe gélatineuse.","Les capsules molles permettent d’administrer des substances huileuses.","Utile pour différencier formes solides et liquides. 💊"],
-["comprimé","n","Forme solide unitaire contenant une dose précise de médicament.","Les comprimés effervescents se dissolvent dans l’eau avant ingestion.","Mot central de la dispensation en pharmacie. 💚"],
-["contre-indication","n","Situation dans laquelle un traitement ne doit pas être utilisé, car il pourrait nuire au patient.","L’allergie à la pénicilline est une contre-indication majeure à cet antibiotique.","Terme vital pour la sécurité du patient. 🚫"],
-["déglutition","n","Action d’avaler un aliment ou un médicament.","Les troubles de la déglutition nécessitent des formes galéniques adaptées.","Fréquent en gériatrie et pédiatrie. 👅"],
-["délivrance","n","Acte par lequel le pharmacien remet un médicament au patient.","La délivrance d’un antibiotique nécessite une prescription médicale.","Concept réglementaire en pharmacie communautaire. 📜"],
-["dénaturation","n","Altération de la structure d’une molécule, souvent d’une protéine, sous l’effet de la chaleur ou du pH.","La dénaturation d’une enzyme réduit son activité.","Terme scientifique clé en biochimie. 🔬"],
-["dosage","n","Mesure quantitative d’un principe actif dans une préparation ou dans le sang.","Un dosage sanguin de lithium permet d’éviter la toxicité.","Utilisé autant en laboratoire qu’en clinique. 📏"],
-["effet secondaire","n","Réaction non souhaitée se produisant en plus de l’effet thérapeutique attendu.","La somnolence est un effet secondaire fréquent des antihistaminiques.","Essentiel à la pharmacovigilance. ⚠️"],
-["émulsion","n","Mélange stable de deux liquides non miscibles, comme l’eau et l’huile.","Les crèmes dermatologiques sont souvent des émulsions.","Notion pratique en formulation. 🧴"],
+["asepsie","n","Méthode visant à prévenir toute contamination microbienne d'un milieu.","Les instruments chirurgicaux doivent être utilisés dans des conditions d'asepsie parfaite.","Principe central en pratique hospitalière. 🧴"],
+["biodisponibilité","n","Proportion d'un médicament qui atteint la circulation systémique et peut agir.","La biodisponibilité d'un comprimé dépend de sa dissolution et de l'absorption intestinale.","Concept de base en pharmacocinétique. 📈"],
+["biotransformation","n","Modification chimique d'un médicament par l'organisme, souvent au niveau du foie.","La biotransformation convertit le médicament en métabolites actifs ou inactifs.","Notion clé pour le dosage thérapeutique. 🧪"],
+["cachet","n","Ancien type de forme orale contenant une poudre médicamenteuse entre deux feuilles d'amidon.","Les cachets ont été remplacés par les comprimés modernes.","Terme historique encore présent dans certains textes. 📦"],
+["capsule","n","Forme pharmaceutique contenant une substance active dans une enveloppe gélatineuse.","Les capsules molles permettent d'administrer des substances huileuses.","Utile pour différencier formes solides et liquides. 💊"],
+["comprimé","n","Forme solide unitaire contenant une dose précise de médicament.","Les comprimés effervescents se dissolvent dans l'eau avant ingestion.","Mot central de la dispensation en pharmacie. 💚"],
+["contre-indication","n","Situation dans laquelle un traitement ne doit pas être utilisé, car il pourrait nuire au patient.","L'allergie à la pénicilline est une contre-indication majeure à cet antibiotique.","Terme vital pour la sécurité du patient. 🚫"],
+["déglutition","n","Action d'avaler un aliment ou un médicament.","Les troubles de la déglutition nécessitent des formes galéniques adaptées.","Fréquent en gériatrie et pédiatrie. 👅"],
+["délivrance","n","Acte par lequel le pharmacien remet un médicament au patient.","La délivrance d'un antibiotique nécessite une prescription médicale.","Concept réglementaire en pharmacie communautaire. 📜"],
+["dénaturation","n","Altération de la structure d'une molécule, souvent d'une protéine, sous l'effet de la chaleur ou du pH.","La dénaturation d'une enzyme réduit son activité.","Terme scientifique clé en biochimie. 🔬"],
+["dosage","n","Mesure quantitative d'un principe actif dans une préparation ou dans le sang.","Un dosage sanguin de lithium permet d'éviter la toxicité.","Utilisé autant en laboratoire qu'en clinique. 📏"],
+["effet secondaire","n","Réaction non souhaitée se produisant en plus de l'effet thérapeutique attendu.","La somnolence est un effet secondaire fréquent des antihistaminiques.","Essentiel à la pharmacovigilance. ⚠️"],
+["émulsion","n","Mélange stable de deux liquides non miscibles, comme l'eau et l'huile.","Les crèmes dermatologiques sont souvent des émulsions.","Notion pratique en formulation. 🧴"],
 ["excipent","n","Substance inerte utilisée pour fabriquer une forme pharmaceutique.","Les excipients assurent la stabilité et la bonne administration du médicament.","Terme courant en galénique. ⚗️"],
-["formulation","n","Processus de conception d’une forme pharmaceutique adaptée à l’administration du médicament.","La formulation influence la vitesse d’absorption et la conservation.","Notion clé pour les pharmaciens industriels. 🧪"],
-["galénique","adj","Relatif à la forme et à la présentation d’un médicament.","L’étude galénique vise à optimiser la libération du principe actif.","Domaine essentiel du développement pharmaceutique. ⚕️"],
+["formulation","n","Processus de conception d'une forme pharmaceutique adaptée à l'administration du médicament.","La formulation influence la vitesse d'absorption et la conservation.","Notion clé pour les pharmaciens industriels. 🧪"],
+["galénique","adj","Relatif à la forme et à la présentation d'un médicament.","L'étude galénique vise à optimiser la libération du principe actif.","Domaine essentiel du développement pharmaceutique. ⚕️"],
 ["gélule","n","Synonyme courant de capsule contenant un médicament.","Les gélules facilitent la prise de substances malodorantes.","Terme du quotidien pharmaceutique. 💊"],
-["générique","adj","Se dit d’un médicament ayant la même composition que le médicament original mais vendu sous un autre nom.","Les médicaments génériques permettent de réduire les coûts de santé.","Très courant dans la pratique officinale. 💵"],
-["homéopathie","n","Méthode thérapeutique basée sur la similitude et l’infinitésimal.","L’homéopathie suscite un débat sur son efficacité scientifique.","Présente dans la culture pharmaceutique. 🌿"],
-["hydrosoluble","adj","Qui peut se dissoudre dans l’eau.","Les vitamines du groupe B sont hydrosolubles.","Terme chimique et nutritionnel. 💧"],
-["inhalation","n","Procédé d’administration par voie respiratoire d’un médicament volatilisé.","Les bronchodilatateurs sont souvent administrés par inhalation.","Important en pneumologie. 🌬️"],
-["injection","n","Introduction d’un médicament dans l’organisme à l’aide d’une seringue ou d’un dispositif similaire.","Les vaccins sont administrés par injection intramusculaire.","Procédé central en médecine hospitalière. 💉"],
-["interaction","n","Influence réciproque entre deux médicaments administrés ensemble.","L’interaction entre anticoagulants et anti-inflammatoires peut être dangereuse.","Connaissance essentielle pour la sécurité thérapeutique. ⚖️"],
-["isotonique","adj","Se dit d’une solution ayant la même pression osmotique que le plasma sanguin.","Le sérum physiologique est une solution isotonique.","Utilisé en perfusion et soins oculaires. 👁️"],
-["libération","n","Moment où le principe actif se détache de la forme galénique pour agir dans l’organisme.","Les comprimés à libération prolongée diffusent le médicament sur plusieurs heures.","Concept technique en formulation. 🕒"],
-["métabolite","n","Substance résultant du métabolisme d’un médicament ou d’une molécule biologique.","Les métabolites peuvent être actifs ou inactifs.","Terme clé en pharmacocinétique. 🔄"],
+["générique","adj","Se dit d'un médicament ayant la même composition que le médicament original mais vendu sous un autre nom.","Les médicaments génériques permettent de réduire les coûts de santé.","Très courant dans la pratique officinale. 💵"],
+["homéopathie","n","Méthode thérapeutique basée sur la similitude et l'infinitésimal.","L'homéopathie suscite un débat sur son efficacité scientifique.","Présente dans la culture pharmaceutique. 🌿"],
+["hydrosoluble","adj","Qui peut se dissoudre dans l'eau.","Les vitamines du groupe B sont hydrosolubles.","Terme chimique et nutritionnel. 💧"],
+["inhalation","n","Procédé d'administration par voie respiratoire d'un médicament volatilisé.","Les bronchodilatateurs sont souvent administrés par inhalation.","Important en pneumologie. 🌬️"],
+["injection","n","Introduction d'un médicament dans l'organisme à l'aide d'une seringue ou d'un dispositif similaire.","Les vaccins sont administrés par injection intramusculaire.","Procédé central en médecine hospitalière. 💉"],
+["interaction","n","Influence réciproque entre deux médicaments administrés ensemble.","L'interaction entre anticoagulants et anti-inflammatoires peut être dangereuse.","Connaissance essentielle pour la sécurité thérapeutique. ⚖️"],
+["isotonique","adj","Se dit d'une solution ayant la même pression osmotique que le plasma sanguin.","Le sérum physiologique est une solution isotonique.","Utilisé en perfusion et soins oculaires. 👁️"],
+["libération","n","Moment où le principe actif se détache de la forme galénique pour agir dans l'organisme.","Les comprimés à libération prolongée diffusent le médicament sur plusieurs heures.","Concept technique en formulation. 🕒"],
+["métabolite","n","Substance résultant du métabolisme d'un médicament ou d'une molécule biologique.","Les métabolites peuvent être actifs ou inactifs.","Terme clé en pharmacocinétique. 🔄"],
 ["neuroleptique","n","Médicament utilisé pour traiter les troubles psychotiques.","Les neuroleptiques agissent sur les récepteurs dopaminergiques.","Concept en psychopharmacologie. 🧠"],
-["ophtalmique","adj","Qui concerne l’œil ou la vision.","Les collyres sont des préparations ophtalmiques stériles.","Employé pour préciser une voie d’administration. 👁️"],
-["osmose","n","Passage d’un solvant à travers une membrane semi-perméable, d’un milieu dilué vers un milieu concentré.","L’osmose est un principe fondamental en biologie cellulaire.","Base scientifique de nombreuses préparations. 🌊"],
+["ophtalmique","adj","Qui concerne l'œil ou la vision.","Les collyres sont des préparations ophtalmiques stériles.","Employé pour préciser une voie d'administration. 👁️"],
+["osmose","n","Passage d'un solvant à travers une membrane semi-perméable, d'un milieu dilué vers un milieu concentré.","L'osmose est un principe fondamental en biologie cellulaire.","Base scientifique de nombreuses préparations. 🌊"],
 ["pansement","n","Dispositif appliqué sur une plaie pour la protéger et favoriser la cicatrisation.","Les pansements hydrocolloïdes maintiennent un environnement humide favorable.","Terme pratique en officine et soins infirmiers. 🩹"],
-["pharmacocinétique","n","Science qui étudie le devenir des médicaments dans l’organisme (absorption, distribution, métabolisme, excrétion).","La pharmacocinétique aide à déterminer la posologie optimale.","Discipline clé de la recherche pharmaceutique. 📊"],
+["pharmacocinétique","n","Science qui étudie le devenir des médicaments dans l'organisme (absorption, distribution, métabolisme, excrétion).","La pharmacocinétique aide à déterminer la posologie optimale.","Discipline clé de la recherche pharmaceutique. 📊"],
 ["pharmacovigilance","n","Surveillance et étude des effets indésirables des médicaments après leur mise sur le marché.","La pharmacovigilance permet de détecter les signaux de sécurité.","Responsabilité majeure du pharmacien. 🛡️"],
-["placebo","n","Substance sans effet pharmacologique administrée pour mesurer l’effet psychologique d’un traitement.","L’effet placebo peut améliorer l’état du patient sans action chimique réelle.","Concept éthique et scientifique fondamental. 🧠"],
-["posologie","n","Quantité et fréquence d’administration d’un médicament.","Une posologie trop élevée augmente le risque d’effets indésirables.","Terme clinique essentiel. ⏱️"],
-["principe actif","n","Substance responsable de l’effet thérapeutique d’un médicament.","Le paracétamol est le principe actif du Doliprane.","Base de la conception pharmaceutique. 🧪"],
-["protocole","n","Ensemble de règles ou d’étapes précises à suivre lors d’un traitement ou d’une expérience.","Le protocole vaccinal comporte plusieurs doses.","Utilisé dans recherche et clinique. 📋"],
+["placebo","n","Substance sans effet pharmacologique administrée pour mesurer l'effet psychologique d'un traitement.","L'effet placebo peut améliorer l'état du patient sans action chimique réelle.","Concept éthique et scientifique fondamental. 🧠"],
+["posologie","n","Quantité et fréquence d'administration d'un médicament.","Une posologie trop élevée augmente le risque d'effets indésirables.","Terme clinique essentiel. ⏱️"],
+["principe actif","n","Substance responsable de l'effet thérapeutique d'un médicament.","Le paracétamol est le principe actif du Doliprane.","Base de la conception pharmaceutique. 🧪"],
+["protocole","n","Ensemble de règles ou d'étapes précises à suivre lors d'un traitement ou d'une expérience.","Le protocole vaccinal comporte plusieurs doses.","Utilisé dans recherche et clinique. 📋"],
 ["récepteur","n","Molécule cible sur laquelle agit un médicament pour produire un effet biologique.","Les bêta-récepteurs cardiaques sont bloqués par certains antihypertenseurs.","Notion de base en pharmacodynamie. 🔬"],
 ["solution","n","Préparation liquide homogène contenant une ou plusieurs substances dissoutes.","Les solutions buvables sont courantes en pédiatrie.","Concept transversal en pharmacie. 💧"],
-["stérilisation","n","Processus d’élimination totale des micro-organismes d’un matériel ou d’un produit.","La stérilisation à la vapeur est utilisée pour les instruments chirurgicaux.","Principe fondamental en hygiène hospitalière. 🧼"],
+["stérilisation","n","Processus d'élimination totale des micro-organismes d'un matériel ou d'un produit.","La stérilisation à la vapeur est utilisée pour les instruments chirurgicaux.","Principe fondamental en hygiène hospitalière. 🧼"],
 ["toxicologie","n","Science qui étudie les effets nocifs des substances sur les organismes vivants.","La toxicologie évalue la sécurité des nouveaux médicaments.","Discipline complémentaire à la pharmacologie. ☣️"],
-["voie d’administration","n","Chemin par lequel un médicament est introduit dans l’organisme (orale, injectable, cutanée, etc.).","La voie d’administration influence la vitesse d’action du médicament.","Terme clé dans les prescriptions et protocoles. 🧭"]
+["voie d'administration","n","Chemin par lequel un médicament est introduit dans l'organisme (orale, injectable, cutanée, etc.).","La voie d'administration influence la vitesse d'action du médicament.","Terme clé dans les prescriptions et protocoles. 🧭"]
     ];
 
     const container = document.getElementById('lexicon');
@@ -184,29 +156,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
