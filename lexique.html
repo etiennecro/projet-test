@@ -6,37 +6,43 @@
   <title>Lexique pharmaceutique - 50 mots essentiels</title>
   <style>
     :root{
-      --bg:#013220; 
-      --card:#014f34; 
-      --muted:#c9f0d0;
-      --accent:#32cd81;
+      --bg-dark:#0D3D38;
+      --bg-card:#1a5550;
+      --teal-vibrant:#16A39C;
+      --teal-light:#4ECDC1;
+      --accent-warm:#F0A04D;
+      --accent-pink:#D96B81;
+      --text-light:#F5F5F0;
+      --text-dark:#2D2D2D;
       --glass: rgba(255,255,255,0.05);
       font-family: "Segoe UI", Inter, system-ui, sans-serif;
     }
-    html,body{height:100%;margin:0;background-color:var(--bg);color:#f4f4f4;}
+    html,body{height:100%;margin:0;background-color:var(--bg-dark);color:var(--text-light);}
     .wrap{max-width:1100px;margin:32px auto;padding:24px;}
     header{margin-bottom:20px;}
-    h1{margin:0;font-size:1.8rem;color:#32cd81;}
-    p.lead{margin:6px 0 0;color:#f4f4f4;font-size:1rem}
+    h1{margin:0;font-size:1.8rem;color:var(--teal-light);}
+    p.lead{margin:6px 0 0;color:var(--text-light);font-size:1rem}
     .controls{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}
     input[type="search"], select, button{
-      padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);
-      background:var(--glass);color:inherit;outline:none;
+      padding:10px 12px;border-radius:10px;border:1px solid rgba(22,163,156,0.2);
+      background:rgba(22,163,156,0.1);color:var(--text-light);outline:none;
     }
-    input[type="search"]{width:320px;background:#ffffff;color:#013220;}
-    select{background:#ffffff;color:#013220;}
-    select option{color:#013220;}
-    button{cursor:pointer}
+    input[type="search"]{width:320px;background:rgba(22,163,156,0.15);color:var(--text-light);}
+    input[type="search"]::placeholder{color:rgba(245,245,240,0.6);}
+    select{background:rgba(22,163,156,0.15);color:var(--text-light);}
+    select option{background:var(--bg-dark);color:var(--text-light);}
+    button{cursor:pointer;background:var(--accent-warm);color:var(--text-dark);font-weight:600;border:none;transition:all 0.3s ease;}
+    button:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(240,160,77,0.3);}
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,0.04);}
-    .word{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem;color:#32cd81;}
-    .pos{font-size:0.85rem;color:#f4f4f4;margin-left:auto}
-    .def{margin:8px 0;color:#f4f4f4}
-    .ex{margin:6px 0;color:#f4f4f4;font-style:italic}
-    .note{font-size:0.85rem;color:#32cd81}
-    footer{margin-top:24px;color:#f4f4f4;font-size:0.9rem}
-    .badge{background:rgba(50,205,129,0.1);padding:6px 10px;border-radius:999px;color:#32cd81;font-weight:600}
+    .card{background:linear-gradient(180deg, rgba(22,163,156,0.12), rgba(22,163,156,0.05));
+      border-radius:12px;padding:16px;border:1px solid rgba(22,163,156,0.2);}
+    .word{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem;color:var(--teal-light);}
+    .pos{font-size:0.85rem;color:var(--accent-warm);margin-left:auto;background:rgba(240,160,77,0.1);padding:4px 8px;border-radius:4px;}
+    .def{margin:8px 0;color:var(--text-light)}
+    .ex{margin:6px 0;color:var(--text-light);font-style:italic}
+    .note{font-size:0.85rem;color:var(--teal-light)}
+    footer{margin-top:24px;color:var(--text-light);font-size:0.9rem}
+    .badge{background:rgba(22,163,156,0.15);padding:6px 10px;border-radius:999px;color:var(--teal-light);font-weight:600;border:1px solid rgba(22,163,156,0.2);}
     .emoji{font-size:1.3rem}
     @media (max-width:420px){input[type="search"]{width:100%}}
   </style>
