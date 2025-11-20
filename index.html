@@ -6,52 +6,93 @@
   <title>Accueil — Lexique pharmaceutique</title>
   <style>
     :root{
-      --bg-dark:#0D3D38;
-      --bg-card:#1a5550;
-      --teal-vibrant:#16A39C;
-      --teal-light:#4ECDC1;
-      --accent-warm:#F0A04D;
-      --accent-pink:#D96B81;
-      --text-light:#F5F5F0;
-      --text-dark:#2D2D2D;
-      --glass: rgba(255,255,255,0.05);
+      --principal:#007A84;
+      --secondaire:#32A6AC;
+      --accent:#F8C137;
+      --neutre-clair:#F6F8F4;
+      --neutre-fonce:#1E2A2A;
       font-family: "Segoe UI", Inter, system-ui, sans-serif;
     }
-    html,body{height:100%;margin:0;background-color:var(--bg-dark);color:var(--text-light);}
+    html,body{height:100%;margin:0;background-color:var(--neutre-fonce);color:var(--neutre-clair);}
     .wrap{max-width:1100px;margin:0 auto;padding:24px;}
     
     header{text-align:center;margin-bottom:40px;padding-top:20px;}
-    .logo{max-width:400px;width:100%;height:auto;margin-bottom:24px;}
+    .header-title{
+      font-size:2.5rem;
+      font-weight:700;
+      margin:0;
+      background:linear-gradient(135deg, var(--secondaire), var(--principal));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .header-subtitle{
+      font-size:1.1rem;
+      color:var(--accent);
+      margin:12px 0 0 0;
+      font-weight:500;
+    }
     
+    .animation-section{
+      background:linear-gradient(180deg, rgba(51,166,172,0.15), rgba(51,166,172,0.08));
+      border-radius:12px;
+      padding:32px;
+      margin-bottom:40px;
+      border:1px solid rgba(51,166,172,0.25);
+    }
+    .animation-section h2{
+      color:var(--accent);
+      font-size:1.5rem;
+      margin:0 0 20px 0;
+      text-align:center;
+    }
+    .genially-container{
+      position:relative;
+      width:100%;
+      padding-bottom:56.25%;
+      overflow:hidden;
+      border-radius:8px;
+      background:#000;
+      box-shadow:0 8px 32px rgba(0,122,132,0.3);
+    }
+    .genially-container iframe{
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      border:none;
+    }
+
     .intro{
-      background:linear-gradient(180deg, rgba(22,163,156,0.12), rgba(22,163,156,0.05));
+      background:linear-gradient(180deg, rgba(51,166,172,0.15), rgba(51,166,172,0.08));
       border-radius:12px;
       padding:32px;
       margin-bottom:32px;
-      border:1px solid rgba(22,163,156,0.2);
+      border:1px solid rgba(51,166,172,0.25);
       text-align:center;
     }
-    .intro h1{
-      color:var(--teal-light);
-      font-size:2rem;
+    .intro h2{
+      color:var(--secondaire);
+      font-size:1.8rem;
       margin:0 0 20px 0;
     }
     .intro p{
-      font-size:1.1rem;
+      font-size:1.05rem;
       line-height:1.7;
       margin:12px 0;
-      color:var(--text-light);
+      color:var(--neutre-clair);
     }
     
     .guide{
-      background:linear-gradient(180deg, rgba(22,163,156,0.12), rgba(22,163,156,0.05));
+      background:linear-gradient(180deg, rgba(0,122,132,0.12), rgba(0,122,132,0.06));
       border-radius:12px;
       padding:32px;
       margin-bottom:32px;
-      border:1px solid rgba(22,163,156,0.2);
+      border:1px solid rgba(0,122,132,0.2);
     }
     .guide h2{
-      color:var(--accent-warm);
+      color:var(--accent);
       font-size:1.5rem;
       margin:0 0 20px 0;
     }
@@ -66,7 +107,7 @@
       position:relative;
       font-size:1.05rem;
       line-height:1.6;
-      color:var(--text-light);
+      color:var(--neutre-clair);
     }
     .guide li:before{
       content:"💊";
@@ -75,70 +116,39 @@
       font-size:1.3rem;
     }
     
-    .animation-section{
-      background:linear-gradient(180deg, rgba(22,163,156,0.12), rgba(22,163,156,0.05));
-      border-radius:12px;
-      padding:32px;
-      margin-bottom:32px;
-      border:1px solid rgba(22,163,156,0.2);
-    }
-    .animation-section h2{
-      color:var(--teal-vibrant);
-      font-size:1.5rem;
-      margin:0 0 20px 0;
-      text-align:center;
-    }
-    .genially-container{
-      position:relative;
-      width:100%;
-      padding-bottom:56.25%;
-      overflow:hidden;
-      border-radius:8px;
-      background:#000;
-      box-shadow:0 8px 32px rgba(22,163,156,0.2);
-    }
-    .genially-container iframe{
-      position:absolute;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      border:none;
-    }
-    
     .cta-section{
       text-align:center;
       margin:40px 0;
     }
     .btn-lexique{
       display:inline-block;
-      background:var(--accent-pink);
-      color:var(--text-light);
+      background:var(--accent);
+      color:var(--neutre-fonce);
       padding:16px 40px;
       border-radius:12px;
       text-decoration:none;
       font-weight:700;
       font-size:1.2rem;
       transition:all 0.3s ease;
-      border:2px solid var(--accent-pink);
+      border:2px solid var(--accent);
     }
     .btn-lexique:hover{
       background:transparent;
-      color:var(--accent-pink);
+      color:var(--accent);
       transform:translateY(-2px);
-      box-shadow:0 4px 12px rgba(217,107,129,0.3);
+      box-shadow:0 4px 12px rgba(248,193,55,0.35);
     }
     
     footer{
-      background:linear-gradient(180deg, rgba(22,163,156,0.12), rgba(22,163,156,0.05));
+      background:linear-gradient(180deg, rgba(0,122,132,0.12), rgba(0,122,132,0.06));
       border-radius:12px;
       padding:32px;
-      border:1px solid rgba(22,163,156,0.2);
+      border:1px solid rgba(0,122,132,0.2);
       margin-top:40px;
     }
     .sponsors-title{
       text-align:center;
-      color:var(--teal-light);
+      color:var(--secondaire);
       font-size:1.3rem;
       margin:0 0 24px 0;
       font-weight:600;
@@ -151,29 +161,30 @@
       justify-items:center;
     }
     .sponsor{
-      background:rgba(22,163,156,0.1);
+      background:rgba(0,122,132,0.12);
       padding:20px;
       border-radius:8px;
       text-align:center;
       font-size:0.95rem;
-      color:var(--text-light);
+      color:var(--neutre-clair);
       min-height:80px;
       display:flex;
       align-items:center;
       justify-content:center;
-      border:1px solid rgba(22,163,156,0.15);
+      border:1px solid rgba(0,122,132,0.18);
     }
     .copyright{
       text-align:center;
       margin-top:24px;
       padding-top:24px;
-      border-top:1px solid rgba(22,163,156,0.1);
-      color:var(--teal-light);
+      border-top:1px solid rgba(0,122,132,0.15);
+      color:var(--secondaire);
       font-size:0.9rem;
     }
     
     @media (max-width:768px){
-      .intro h1{font-size:1.6rem;}
+      .header-title{font-size:1.8rem;}
+      .intro h2{font-size:1.4rem;}
       .intro p{font-size:1rem;}
       .guide li{font-size:1rem;}
       .sponsors{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));}
@@ -183,11 +194,19 @@
 <body>
   <div class="wrap">
     <header>
-      <img src="logo.png" alt="Logo Lexique Pharmaceutique" class="logo" />
+      <h1 class="header-title">💊 Lexique Pharmaceutique</h1>
+      <p class="header-subtitle">Vocabulaire technique pharmaceutique</p>
     </header>
 
+    <section class="animation-section">
+      <h2>🎬 Animation pédagogique</h2>
+      <div class="genially-container">
+        <iframe src="https://view.genially.com/691e13b65125d448a5f0c749" allowfullscreen></iframe>
+      </div>
+    </section>
+
     <section class="intro">
-      <h1>💊 Bienvenue au Lexique Pharmaceutique</h1>
+      <h2>💡 À propos de ce lexique</h2>
       <p>Découvrez 50 termes essentiels du domaine pharmaceutique, soigneusement sélectionnés pour enrichir vos connaissances professionnelles.</p>
       <p>Cet outil pédagogique interactif a été conçu pour accompagner les étudiants et enseignants en pharmacie dans leur apprentissage du vocabulaire technique.</p>
       <p>Explorez les définitions, exemples concrets et usages pratiques de chaque terme pour maîtriser le langage pharmaceutique.</p>
@@ -200,13 +219,6 @@
         <li>Filtrez les résultats par catégorie grammaticale (nom, verbe, adjectif) pour cibler votre apprentissage selon vos besoins pédagogiques.</li>
         <li>Consultez les exemples d'usage et les notes explicatives pour comprendre le contexte d'application de chaque terme dans la pratique pharmaceutique.</li>
       </ul>
-    </section>
-
-    <section class="animation-section">
-      <h2>🎬 Animation pédagogique</h2>
-      <div class="genially-container">
-        <iframe src="https://view.genially.com/691e13b65125d448a5f0c749" allowfullscreen></iframe>
-      </div>
     </section>
 
     <div class="cta-section">
