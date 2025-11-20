@@ -6,45 +6,46 @@
   <title>Lexique pharmaceutique - 50 mots essentiels</title>
   <style>
     :root{
-      --bg-dark:#0D3D38;
-      --bg-card:#1a5550;
-      --teal-vibrant:#16A39C;
-      --teal-light:#4ECDC1;
-      --accent-warm:#F0A04D;
-      --accent-pink:#D96B81;
-      --text-light:#F5F5F0;
-      --text-dark:#2D2D2D;
-      --glass: rgba(255,255,255,0.05);
+      --principal:#007A84;
+      --secondaire:#32A6AC;
+      --accent:#F8C137;
+      --neutre-clair:#F6F8F4;
+      --neutre-fonce:#1E2A2A;
       font-family: "Segoe UI", Inter, system-ui, sans-serif;
     }
-    html,body{height:100%;margin:0;background-color:var(--bg-dark);color:var(--text-light);}
+    html,body{height:100%;margin:0;background-color:var(--neutre-fonce);color:var(--neutre-clair);}
     .wrap{max-width:1100px;margin:32px auto;padding:24px;}
-    header{margin-bottom:20px;}
-    h1{margin:0;font-size:1.8rem;color:var(--teal-light);}
-    p.lead{margin:6px 0 0;color:var(--text-light);font-size:1rem}
-    .controls{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}
+    header{margin-bottom:32px;}
+    .badge{background:rgba(50,166,172,0.2);padding:8px 16px;border-radius:999px;color:var(--secondaire);font-weight:600;border:1px solid rgba(50,166,172,0.3);display:inline-block;margin-bottom:16px;}
+    h1{margin:0;font-size:2rem;background:linear-gradient(135deg, var(--secondaire), var(--principal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    p.lead{margin:12px 0 0;color:var(--neutre-clair);font-size:1.05rem;line-height:1.6;}
+    .controls{display:flex;gap:12px;margin:24px 0;flex-wrap:wrap}
     input[type="search"], select, button{
-      padding:10px 12px;border-radius:10px;border:1px solid rgba(22,163,156,0.2);
-      background:rgba(22,163,156,0.1);color:var(--text-light);outline:none;
+      padding:12px 16px;border-radius:10px;border:1px solid rgba(50,166,172,0.25);
+      background:rgba(50,166,172,0.1);color:var(--neutre-clair);outline:none;font-size:1rem;
     }
-    input[type="search"]{width:320px;background:rgba(22,163,156,0.15);color:var(--text-light);}
-    input[type="search"]::placeholder{color:rgba(245,245,240,0.6);}
-    select{background:rgba(22,163,156,0.15);color:var(--text-light);}
-    select option{background:var(--bg-dark);color:var(--text-light);}
-    button{cursor:pointer;background:var(--accent-warm);color:var(--text-dark);font-weight:600;border:none;transition:all 0.3s ease;}
-    button:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(240,160,77,0.3);}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
-    .card{background:linear-gradient(180deg, rgba(22,163,156,0.12), rgba(22,163,156,0.05));
-      border-radius:12px;padding:16px;border:1px solid rgba(22,163,156,0.2);}
-    .word{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem;color:var(--teal-light);}
-    .pos{font-size:0.85rem;color:var(--accent-warm);margin-left:auto;background:rgba(240,160,77,0.1);padding:4px 8px;border-radius:4px;}
-    .def{margin:8px 0;color:var(--text-light)}
-    .ex{margin:6px 0;color:var(--text-light);font-style:italic}
-    .note{font-size:0.85rem;color:var(--teal-light)}
-    footer{margin-top:24px;color:var(--text-light);font-size:0.9rem}
-    .badge{background:rgba(22,163,156,0.15);padding:6px 10px;border-radius:999px;color:var(--teal-light);font-weight:600;border:1px solid rgba(22,163,156,0.2);}
-    .emoji{font-size:1.3rem}
-    @media (max-width:420px){input[type="search"]{width:100%}}
+    input[type="search"]{flex:1;min-width:280px;background:rgba(50,166,172,0.15);}
+    input[type="search"]::placeholder{color:rgba(246,248,244,0.5);}
+    select{background:rgba(50,166,172,0.15);color:var(--neutre-clair);cursor:pointer;}
+    select option{background:var(--neutre-fonce);color:var(--neutre-clair);}
+    button{cursor:pointer;background:var(--accent);color:var(--neutre-fonce);font-weight:700;border:none;transition:all 0.3s ease;}
+    button:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(248,193,55,0.35);}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
+    .card{background:linear-gradient(180deg, rgba(50,166,172,0.15), rgba(50,166,172,0.08));border-radius:12px;padding:20px;border:1px solid rgba(50,166,172,0.25);transition:all 0.3s ease;}
+    .card:hover{border-color:rgba(248,193,55,0.4);box-shadow:0 4px 16px rgba(0,122,132,0.2);}
+    .word{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.1rem;color:var(--secondaire);margin-bottom:12px;}
+    .pos{font-size:0.8rem;color:var(--neutre-clair);margin-left:auto;background:rgba(248,193,55,0.15);padding:6px 10px;border-radius:6px;border:1px solid rgba(248,193,55,0.3);}
+    .def{margin:10px 0;color:var(--neutre-clair);line-height:1.6;font-size:0.95rem;}
+    .ex{margin:10px 0;color:rgba(246,248,244,0.85);font-style:italic;font-size:0.95rem;padding-left:12px;border-left:3px solid var(--accent);}
+    .note{font-size:0.9rem;color:var(--secondaire);background:rgba(50,166,172,0.1);padding:10px;border-radius:6px;margin-top:10px;}
+    .emoji{font-size:1.4rem;}
+    footer{margin-top:40px;padding-top:24px;border-top:1px solid rgba(50,166,172,0.15);color:var(--neutre-clair);font-size:0.95rem;line-height:1.6;}
+    footer p{margin:8px 0;}
+    @media (max-width:768px){
+      h1{font-size:1.5rem;}
+      .controls{flex-direction:column;}
+      input[type="search"]{min-width:100%;}
+    }
   </style>
 </head>
 <body>
@@ -134,14 +135,18 @@
     const container = document.getElementById('lexicon');
     function render(list){
       container.innerHTML = '';
+      if(list.length === 0){
+        container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: rgba(246,248,244,0.6); padding: 40px;">Aucun résultat trouvé</p>';
+        return;
+      }
       list.forEach(([mot,nat,def,ex,note])=>{
         const card = document.createElement('article');
         card.className = 'card';
         card.innerHTML = `
           <div class="word"><span class="emoji">💊</span><span>${mot}</span><span class="pos">${nat}</span></div>
           <div class="def">${def}</div>
-          <div class="ex">🧪 Exemple : ${ex}</div>
-          <div class="note">⚕️ Usage : ${note}</div>
+          <div class="ex">🧪 ${ex}</div>
+          <div class="note">⚕️ ${note}</div>
         `;
         container.appendChild(card);
       });
