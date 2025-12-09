@@ -8,8 +8,10 @@ const LEX = [
   
   ["Emballage unitaire", "Emballage contenant une unité de médicament identifiée (ex. : un sachet comprenant un comprimé de furosémide 20 mg).", "En collaboration avec l'APES.", "Sachet unidose", ""],
   
-  ["Enceinte de préparation stérile", "Équipement assurant un niveau de classification ISO 5 pour la qualité de l'air filtré HEPA sur les sites critiques exposés lors de la technique aseptique.", "OPQ.Norme 2014. 01; 2014", "Hotte à flux laminaire", ""]
+  ["Enceinte de préparation stérile", "Équipement assurant un niveau de classification ISO 5 pour la qualité de l'air filtré HEPA sur les sites critiques exposés lors de la technique aseptique.", "OPQ.Norme 2014. 01; 2014", "Hotte à flux laminaire", ""],
   
-  // Ajoutez vos 356 autres termes ici au même format
+  ["Évaluateur autorisé", "Personne qui, sur autorisation du chef de département ou de service ou d'un pharmacien désigné par celui-ci, supervise et corrige une épreuve écrite ou pratique qui sanctionne une formation. Cette personne peut être un pharmacien, technicien en pharmacie ou assistant technique.", "En collaboration avec l'APES.", "", ""]
+  
+  // Ajoutez vos 355 autres termes ici au même format
   // ["Terme", "Définition", "Source", "Autres termes", "Notes"],
 ];
