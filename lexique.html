@@ -36,8 +36,12 @@
     .word{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.1rem;color:var(--secondaire);margin-bottom:12px;}
     .pos{font-size:0.8rem;color:var(--neutre-clair);margin-left:auto;background:rgba(248,193,55,0.15);padding:6px 10px;border-radius:6px;border:1px solid rgba(248,193,55,0.3);}
     .def{margin:10px 0;color:var(--neutre-clair);line-height:1.6;font-size:0.95rem;}
-    .ex{margin:10px 0;color:rgba(246,248,244,0.85);font-weight:600;font-size:0.95rem;padding-left:12px;border-left:3px solid var(--accent);}
+    .ex{margin:10px 0;color:rgba(246,248,244,0.85);font-size:0.95rem;padding-left:12px;border-left:3px solid var(--accent);}
     .note{font-size:0.9rem;color:rgba(246,248,244,0.75);background:rgba(50,166,172,0.1);padding:10px;border-radius:6px;margin-top:10px;line-height:1.5;}
+    .note-toggle{margin-top:8px;color:var(--accent);cursor:pointer;font-size:0.85rem;transition:all 0.2s ease;}
+    .note-toggle:hover{color:var(--secondaire);}
+    .note-content{display:none;margin-top:8px;padding-top:8px;border-top:1px solid rgba(50,166,172,0.2);color:rgba(246,248,244,0.85);}
+    .note-content.visible{display:block;}
     .emoji{font-size:1.4rem;}
     footer{margin-top:40px;padding-top:24px;border-top:1px solid rgba(50,166,172,0.15);color:var(--neutre-clair);font-size:0.95rem;line-height:1.6;}
     footer p{margin:8px 0;}
@@ -86,12 +90,20 @@
       list.forEach(([mot,def,source,autres,notes])=>{
         const card = document.createElement('article');
         card.className = 'card';
+        const hasNotes = notes && notes.trim().length > 0;
         card.innerHTML = `
           <div class="word"><span class="emoji">💊</span><span>${mot}</span></div>
           <div class="def">${def}</div>
-          <div class="ex"><strong>Source:</strong> ${source}</div>
-          <div class="ex"><strong>Autres termes:</strong> ${autres}</div>
-          <div class="note">ℹ️ ${notes}</div>
+          ${autres ? `<div class="ex">${autres}</div>` : ''}
+          <div class="note">
+            📚 <strong>Source:</strong> ${source}
+            ${hasNotes ? `
+              <div class="note-toggle" onclick="this.nextElementSibling.classList.toggle('visible')">
+                ℹ️ Voir la note
+              </div>
+              <div class="note-content">${notes}</div>
+            ` : ''}
+          </div>
         `;
         container.appendChild(card);
       });
