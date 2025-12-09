@@ -36,6 +36,10 @@
     .word{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.1rem;color:var(--secondaire);margin-bottom:12px;}
     .pos{font-size:0.8rem;color:var(--neutre-clair);margin-left:auto;background:rgba(248,193,55,0.15);padding:6px 10px;border-radius:6px;border:1px solid rgba(248,193,55,0.3);}
     .def{margin:10px 0;color:var(--neutre-clair);line-height:1.6;font-size:0.95rem;}
+    .def.truncated{max-height:4.8em;overflow:hidden;position:relative;}
+    .def.truncated::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1.5em;background:linear-gradient(to bottom, transparent, rgba(30,42,42,0.9));}
+    .def-toggle{margin-top:8px;color:var(--accent);cursor:pointer;font-size:0.85rem;transition:all 0.2s ease;display:inline-block;}
+    .def-toggle:hover{color:var(--secondaire);}
     .ex{margin:10px 0;color:rgba(246,248,244,0.85);font-size:0.95rem;padding-left:12px;border-left:3px solid var(--accent);}
     .note{font-size:0.9rem;color:rgba(246,248,244,0.75);background:rgba(50,166,172,0.1);padding:10px;border-radius:6px;margin-top:10px;line-height:1.5;}
     .note-toggle{margin-top:8px;color:var(--accent);cursor:pointer;font-size:0.85rem;transition:all 0.2s ease;}
@@ -75,7 +79,7 @@
     </footer>
   </div>
 
-  <script src="/projet-test/termes.js"></script>
+  <script src="termes.js"></script>
   <script>
     const container = document.getElementById('lexicon');
     function render(list){
@@ -88,12 +92,26 @@
         const card = document.createElement('article');
         card.className = 'card';
         const hasNotes = notes && notes.trim().length > 0;
+        const isLongDef = def.length > 250;
+        const defId = 'def-' + Math.random().toString(36).substr(2, 9);
+        
         card.innerHTML = `
           <div class="word"><span class="emoji">💊</span><span>${mot}</span></div>
-          <div class="def">${def}</div>
+          <div class="def ${isLongDef ? 'truncated' : ''}" id="${defId}">${def}</div>
+          ${isLongDef ? `<div class="def-toggle" onclick="
+            const el = document.getElementById('${defId}');
+            const btn = this;
+            if(el.classList.contains('truncated')) {
+              el.classList.remove('truncated');
+              btn.textContent = '▲ Réduire';
+            } else {
+              el.classList.add('truncated');
+              btn.textContent = '▼ Lire la suite';
+            }
+          ">▼ Lire la suite</div>` : ''}
           ${autres ? `<div class="ex">${autres}</div>` : ''}
           <div class="note">
-            📚 <strong>Source:</strong> ${source}
+            📚 <strong>Source:</strong> ${source || 'Non spécifiée'}
             ${hasNotes ? `
               <div class="note-toggle" onclick="this.nextElementSibling.classList.toggle('visible')">
                 ℹ️ Voir la note
