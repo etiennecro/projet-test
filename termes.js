@@ -12,8 +12,10 @@ const LEX = [
   
   ["Évaluateur autorisé", "Personne qui, sur autorisation du chef de département ou de service ou d'un pharmacien désigné par celui-ci, supervise et corrige une épreuve écrite ou pratique qui sanctionne une formation. Cette personne peut être un pharmacien, technicien en pharmacie ou assistant technique.", "En collaboration avec l'APES.", "", ""],
   
-  ["Les médicaments au commun", "Médicaments entreposés sur les unités de soins, dans un cabinet centralisé ou non, et approvisionnés par le département de pharmacie de l'établissement. Son utilisation est encadrée par une ordonnance individuelle ou collective activée au nom d'un patient pour un usage spécifique. Bien que l'ordonnance soit validée par le pharmacien, le médicament peut être administré avant que le département de pharmacie n'en fasse le premier service au nom du patient. Ce mode de distribution vise à répondre rapidement aux besoins cliniques tout en respectant les processus de validation pharmaceutique.", "", "", ""]
+  ["Les médicaments au commun", "Médicaments entreposés sur les unités de soins, dans un cabinet centralisé ou non, et approvisionnés par le département de pharmacie de l'établissement. Son utilisation est encadrée par une ordonnance individuelle ou collective activée au nom d'un patient pour un usage spécifique. Bien que l'ordonnance soit validée par le pharmacien, le médicament peut être administré avant que le département de pharmacie n'en fasse le premier service au nom du patient. Ce mode de distribution vise à répondre rapidement aux besoins cliniques tout en respectant les processus de validation pharmaceutique.", "", "", ""],
   
-  // Ajoutez vos 354 autres termes ici au même format
+  ["Produit de santé naturel (PSN)", "Produit issu de substances présentes dans la nature, qui est généralement consommé à des fins thérapeutiques ou pour ses effets physiologiques bienfaisants.", "GDT", "", "Les produits de santé naturels se présentent sous différentes formes telles que les vitamines et minéraux, les plantes médicinales, les remèdes homéopathiques ou traditionnels, les probiotiques, les enzymes, les acides gras et les acides aminés. Réglementés par Santé Canada, les produits de santé naturels doivent obligatoirement porter un numéro de produit naturel (NPN) en vue d'être commercialisés."]
+  
+  // Ajoutez vos 353 autres termes ici au même format
   // ["Terme", "Définition", "Source", "Autres termes", "Notes"],
 ];
