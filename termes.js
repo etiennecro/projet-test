@@ -10,8 +10,10 @@ const LEX = [
   
   ["Enceinte de préparation stérile", "Équipement assurant un niveau de classification ISO 5 pour la qualité de l'air filtré HEPA sur les sites critiques exposés lors de la technique aseptique.", "OPQ.Norme 2014. 01; 2014", "Hotte à flux laminaire", ""],
   
-  ["Évaluateur autorisé", "Personne qui, sur autorisation du chef de département ou de service ou d'un pharmacien désigné par celui-ci, supervise et corrige une épreuve écrite ou pratique qui sanctionne une formation. Cette personne peut être un pharmacien, technicien en pharmacie ou assistant technique.", "En collaboration avec l'APES.", "", ""]
+  ["Évaluateur autorisé", "Personne qui, sur autorisation du chef de département ou de service ou d'un pharmacien désigné par celui-ci, supervise et corrige une épreuve écrite ou pratique qui sanctionne une formation. Cette personne peut être un pharmacien, technicien en pharmacie ou assistant technique.", "En collaboration avec l'APES.", "", ""],
   
-  // Ajoutez vos 355 autres termes ici au même format
+  ["Les médicaments au commun", "Médicaments entreposés sur les unités de soins, dans un cabinet centralisé ou non, et approvisionnés par le département de pharmacie de l'établissement. Son utilisation est encadrée par une ordonnance individuelle ou collective activée au nom d'un patient pour un usage spécifique. Bien que l'ordonnance soit validée par le pharmacien, le médicament peut être administré avant que le département de pharmacie n'en fasse le premier service au nom du patient. Ce mode de distribution vise à répondre rapidement aux besoins cliniques tout en respectant les processus de validation pharmaceutique.", "", "", ""]
+  
+  // Ajoutez vos 354 autres termes ici au même format
   // ["Terme", "Définition", "Source", "Autres termes", "Notes"],
 ];
