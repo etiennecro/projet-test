@@ -92,7 +92,7 @@
         const card = document.createElement('article');
         card.className = 'card';
         const hasNotes = notes && notes.trim().length > 0;
-        const isLongDef = def.length > 250;
+        const isLongDef = def.length > 200;
         const defId = 'def-' + Math.random().toString(36).substr(2, 9);
         
         card.innerHTML = `
