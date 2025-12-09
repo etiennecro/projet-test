@@ -58,12 +58,6 @@
 
     <div class="controls">
       <input id="search" type="search" placeholder="🔎 Rechercher un terme, une définition ou un usage..." />
-      <select id="filter">
-        <option value="all">Tous</option>
-        <option value="n">Nom</option>
-        <option value="v">Verbe</option>
-        <option value="adj">Adjectif</option>
-      </select>
       <button id="reset">🔄 Réinitialiser</button>
     </div>
 
@@ -79,7 +73,7 @@
 
   <script>
     const LEX = [
-["Comité territorial sur les services pharmaceutiques (CTSP)","n","Structures mises en place au Québec pour coordonner et optimiser l'organisation des services pharmaceutiques dans les différentes régions. Sous l'autorité des agences de santé régionales, ces comités visent à offrir des recommandations sur la planification des ressources humaines, l'accessibilité, et la qualité des services pharmaceutiques.","En collaboration avec l'APES.","Chaque comité est chargé de coordonner les efforts locaux en lien avec les pharmaciens communautaires et hospitaliers, souvent en partenariat avec d'autres professionnels de la santé. 🏥"]
+["Dossier de santé informatisé","Dossier contenant certaines données médicales numérisées et stockées sur un serveur, qui permet de suivre l'état de santé d'un patient en consultation par un accès en ligne entre praticiens et établissements de santé.","GDT","Dossier Santé Québec ou DSQ","Les principales données médicales accessibles en ligne sont les résultats des examens de laboratoire, les rapports d'imagerie médicale et la liste détaillée des médicaments prescrits au patient."]
     ];
 
     const container = document.getElementById('lexicon');
@@ -89,14 +83,15 @@
         container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: rgba(246,248,244,0.6); padding: 40px;">Aucun résultat trouvé</p>';
         return;
       }
-      list.forEach(([mot,nat,def,ex,note])=>{
+      list.forEach(([mot,def,source,autres,notes])=>{
         const card = document.createElement('article');
         card.className = 'card';
         card.innerHTML = `
-          <div class="word"><span class="emoji">💊</span><span>${mot}</span><span class="pos">${nat}</span></div>
+          <div class="word"><span class="emoji">💊</span><span>${mot}</span></div>
           <div class="def">${def}</div>
-          <div class="ex">📋 ${ex}</div>
-          <div class="note">ℹ️ ${note}</div>
+          <div class="ex"><strong>Source:</strong> ${source}</div>
+          <div class="ex"><strong>Autres termes:</strong> ${autres}</div>
+          <div class="note">ℹ️ ${notes}</div>
         `;
         container.appendChild(card);
       });
@@ -104,18 +99,15 @@
     render(LEX);
 
     const search=document.getElementById('search');
-    const filter=document.getElementById('filter');
     const reset=document.getElementById('reset');
     function applyFilters(){
-      const q=search.value.toLowerCase(),f=filter.value;
-      render(LEX.filter(([mot,nat,def,ex,note])=>{
-        if(f!=='all'&&nat!==f)return false;
-        return (mot+def+ex+note).toLowerCase().includes(q);
+      const q=search.value.toLowerCase();
+      render(LEX.filter(([mot,def,source,autres,notes])=>{
+        return (mot+def+source+autres+notes).toLowerCase().includes(q);
       }));
     }
     search.addEventListener('input',applyFilters);
-    filter.addEventListener('change',applyFilters);
-    reset.addEventListener('click',()=>{search.value='';filter.value='all';render(LEX);});
+    reset.addEventListener('click',()=>{search.value='';render(LEX);});
   </script>
 </body>
 </html>
