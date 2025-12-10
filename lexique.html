@@ -41,6 +41,24 @@
     .def-toggle{margin-top:8px;color:var(--accent);cursor:pointer;font-size:0.85rem;transition:all 0.2s ease;display:inline-block;}
     .def-toggle:hover{color:var(--secondaire);}
     .ex{margin:10px 0;color:rgba(246,248,244,0.85);font-size:0.95rem;padding-left:12px;border-left:3px solid var(--accent);}
+    
+    /* ————— MODIFICATIONS DEMANDÉES ————— */
+    .note {
+      font-size: 0.85rem;
+    }
+    .note strong {
+      font-style: italic;
+      font-weight: 700;
+    }
+    .note em {
+      font-style: italic;
+    }
+    .autres-termes {
+      font-size: 0.85rem;
+      font-style: italic;
+    }
+    /* ———————————————————————————————— */
+
     .note{font-size:0.9rem;color:rgba(246,248,244,0.75);background:rgba(50,166,172,0.1);padding:10px;border-radius:6px;margin-top:10px;line-height:1.5;}
     .note-toggle{margin-top:8px;color:var(--accent);cursor:pointer;font-size:0.85rem;transition:all 0.2s ease;}
     .note-toggle:hover{color:var(--secondaire);}
@@ -109,9 +127,11 @@
               btn.textContent = '▼ Lire la suite';
             }
           ">▼ Lire la suite</div>` : ''}
-          ${autres ? `<div class="ex">${autres}</div>` : ''}
+          
+          ${autres ? `<div class="ex autres-termes">Autres termes : ${autres}</div>` : ''}
+
           <div class="note">
-            📚 <strong>Source:</strong> ${source || 'Non spécifiée'}
+            📚 <strong>Source:</strong> <em>${source || 'Non spécifiée'}</em>
             ${hasNotes ? `
               <div class="note-toggle" onclick="this.nextElementSibling.classList.toggle('visible')">
                 ℹ️ Voir la note
