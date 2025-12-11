@@ -13,10 +13,10 @@
       --neutre-fonce:#1E2A2A;
       font-family: "Segoe UI", Inter, system-ui, sans-serif;
     }
-    html,body{height:100%;margin:0;background-color:var(--neutre-fonce);color:var(--neutre-clair);}
+    body{height:100%;margin:0;background-color:var(--neutre-fonce);color:var(--neutre-clair);}
     .wrap{max-width:1100px;margin:32px auto;padding:24px;}
-    header{margin-bottom:32px;}
-    .badge{background:rgba(50,166,172,0.2);padding:8px 16px;border-radius:999px;color:var(--secondaire);font-weight:600;border:1px solid rgba(50,166,172,0.3);display:inline-block;margin-bottom:16px;}
+    header{margin-bottom:32px; display:flex; flex-direction:column; gap:16px;}
+    .badge{background:rgba(50,166,172,0.2);padding:8px 16px;border-radius:999px;color:var(--secondaire);font-weight:600;border:1px solid rgba(50,166,172,0.3);display:inline-block;}
     h1{margin:0;font-size:2rem;background:linear-gradient(135deg, var(--secondaire), var(--principal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
     p.lead{margin:12px 0 0;color:var(--neutre-clair);font-size:1.05rem;line-height:1.6;}
     .controls{display:flex;gap:12px;margin:24px 0;flex-wrap:wrap}
@@ -32,7 +32,6 @@
     button:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(248,193,55,0.35);}
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
 
-    /* ⚠️ Ajout demandé : source au bas */
     .card{
       background:linear-gradient(180deg, rgba(50,166,172,0.15), rgba(50,166,172,0.08));
       border-radius:12px;
@@ -53,7 +52,6 @@
     .def-toggle:hover{color:var(--secondaire);}
     .ex{margin:10px 0;color:rgba(246,248,244,0.85);font-size:0.95rem;padding-left:12px;border-left:3px solid var(--accent);}
 
-    /* ————— MODIFICATIONS DEMANDÉES ————— */
     .note strong { font-style: italic; font-weight: 700; }
     .note em { font-style: italic; }
     .autres-termes { font-size: 0.85rem; font-style: italic; }
@@ -66,11 +64,21 @@
     .note-icon:hover { background: rgba(248,193,55,0.3); transform: scale(1.1); }
     .note-content { display: none; margin-top: 8px; padding: 10px; background: rgba(50,166,172,0.08); border-radius: 6px; border-left: 3px solid var(--accent); color: rgba(246,248,244,0.85); font-size: 0.9rem; line-height: 1.6; }
     .note-content.visible { display: block; }
-    /* ———————————————————————————————— */
 
     .emoji{font-size:1.4rem;}
     footer{margin-top:40px;padding-top:24px;border-top:1px solid rgba(50,166,172,0.15);color:var(--neutre-clair);font-size:0.95rem;line-height:1.6;}
     footer p{margin:8px 0;}
+    
+    /* — Thème clair — */
+    body.light { background-color: #f6f8f4; color: #1e2a2a; }
+    body.light input[type="search"], body.light select { background: rgba(0,122,132,0.05); color: #1e2a2a; border:1px solid rgba(0,122,132,0.2);}
+    body.light button { background: #f8c137; color: #1e2a2a; }
+    body.light .card { background: linear-gradient(180deg, rgba(50,166,172,0.05), rgba(50,166,172,0.02)); border:1px solid rgba(0,122,132,0.2); color: #1e2a2a; }
+    body.light .word { color: #007A84; }
+    body.light .pos { color: #1e2a2a; background: rgba(248,193,55,0.2); border:1px solid rgba(248,193,55,0.3); }
+    body.light .def, body.light .ex, body.light .note-content, body.light .source-box { color: #1e2a2a; }
+    body.light .badge { color: #007A84; background: rgba(50,166,172,0.1); border:1px solid rgba(50,166,172,0.2); }
+    
     @media (max-width:768px){
       h1{font-size:1.5rem;}
       .controls{flex-direction:column;}
@@ -81,7 +89,10 @@
 <body>
   <div class="wrap">
     <header>
-      <div class="badge">⚕️ Lexique pharmaceutique</div>
+      <div style="display:flex; gap:12px; align-items:center;">
+        <div class="badge">⚕️ Lexique pharmaceutique</div>
+        <button id="theme-toggle">🌞 Changer de thème</button>
+      </div>
       <h1>💊 Termes essentiels du domaine pharmaceutique</h1>
       <p class="lead">Définitions et contextes d'usage destinés aux professionnels de la santé 🧪🩺</p>
     </header>
@@ -179,6 +190,13 @@
     }
     search.addEventListener('input',applyFilters);
     reset.addEventListener('click',()=>{search.value='';render(LEX);});
+
+    // — Thème toggle —
+    const themeBtn = document.getElementById('theme-toggle');
+    themeBtn.addEventListener('click', ()=>{
+      document.body.classList.toggle('light');
+      themeBtn.textContent = document.body.classList.contains('light') ? '🌙 Thème sombre' : '🌞 Changer de thème';
+    });
   </script>
 </body>
 </html>
