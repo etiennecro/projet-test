@@ -186,6 +186,13 @@
           
           ${autres ? `<div class="ex autres-termes">Autres termes : ${autres}</div>` : ''}
 
+          ${hasNotes ? `
+            <div class="note-icon" onclick="this.nextElementSibling.classList.toggle('visible')" title="Note supplémentaire">
+              💡
+            </div>
+            <div class="note-content">${notes}</div>
+          ` : ''}
+
           ${hasSource ? `
           <div class="source-box">
             📚 <strong>Source:</strong> <em><span class="source-text ${isLongSource ? 'truncated' : ''}" id="${sourceId}">${source}</span></em>
@@ -201,13 +208,6 @@
               }
             ">▼ Lire la suite</div>` : ''}
           </div>
-          ` : ''}
-
-          ${hasNotes ? `
-            <div class="note-icon" onclick="this.nextElementSibling.classList.toggle('visible')" title="Note supplémentaire">
-              💡
-            </div>
-            <div class="note-content">${notes}</div>
           ` : ''}
         `;
         container.appendChild(card);
