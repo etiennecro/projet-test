@@ -163,6 +163,7 @@
         const card = document.createElement('article');
         card.className = 'card';
         const hasNotes = notes && notes.trim().length > 0;
+        const hasSource = source && source.trim().length > 0;
         const isLongDef = def.length > 215;
         const defId = 'def-' + Math.random().toString(36).substr(2, 9);
         const sourceId = 'source-' + Math.random().toString(36).substr(2, 9);
@@ -185,8 +186,9 @@
           
           ${autres ? `<div class="ex autres-termes">Autres termes : ${autres}</div>` : ''}
 
+          ${hasSource ? `
           <div class="source-box">
-            📚 <strong>Source:</strong> <em><span class="source-text ${isLongSource ? 'truncated' : ''}" id="${sourceId}">${source || 'Non spécifiée'}</span></em>
+            📚 <strong>Source:</strong> <em><span class="source-text ${isLongSource ? 'truncated' : ''}" id="${sourceId}">${source}</span></em>
             ${isLongSource ? `<div class="source-toggle" onclick="
               const el = document.getElementById('${sourceId}');
               const btn = this;
@@ -199,6 +201,7 @@
               }
             ">▼ Lire la suite</div>` : ''}
           </div>
+          ` : ''}
 
           ${hasNotes ? `
             <div class="note-icon" onclick="this.nextElementSibling.classList.toggle('visible')" title="Note supplémentaire">
