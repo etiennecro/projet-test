@@ -43,9 +43,6 @@
     .ex{margin:10px 0;color:rgba(246,248,244,0.85);font-size:0.95rem;padding-left:12px;border-left:3px solid var(--accent);}
     
     /* ————— MODIFICATIONS DEMANDÉES ————— */
-    .note {
-      font-size: 0.85rem;
-    }
     .note strong {
       font-style: italic;
       font-weight: 700;
@@ -56,6 +53,15 @@
     .autres-termes {
       font-size: 0.85rem;
       font-style: italic;
+    }
+    .source-box {
+      font-size: 0.85rem;
+      color: rgba(246,248,244,0.75);
+      background: rgba(50,166,172,0.1);
+      padding: 10px;
+      border-radius: 6px;
+      margin-top: 10px;
+      line-height: 1.5;
     }
     .source-text {
       display: inline;
@@ -77,13 +83,40 @@
     .source-toggle:hover {
       color: var(--secondaire);
     }
+    .note-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: rgba(248,193,55,0.2);
+      border: 1px solid rgba(248,193,55,0.4);
+      border-radius: 50%;
+      cursor: pointer;
+      margin-top: 8px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    .note-icon:hover {
+      background: rgba(248,193,55,0.3);
+      transform: scale(1.1);
+    }
+    .note-content {
+      display: none;
+      margin-top: 8px;
+      padding: 10px;
+      background: rgba(50,166,172,0.08);
+      border-radius: 6px;
+      border-left: 3px solid var(--accent);
+      color: rgba(246,248,244,0.85);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .note-content.visible {
+      display: block;
+    }
     /* ———————————————————————————————— */
 
-    .note{font-size:0.9rem;color:rgba(246,248,244,0.75);background:rgba(50,166,172,0.1);padding:10px;border-radius:6px;margin-top:10px;line-height:1.5;}
-    .note-toggle{margin-top:8px;color:var(--accent);cursor:pointer;font-size:0.85rem;transition:all 0.2s ease;}
-    .note-toggle:hover{color:var(--secondaire);}
-    .note-content{display:none;margin-top:8px;padding-top:8px;border-top:1px solid rgba(50,166,172,0.2);color:rgba(246,248,244,0.85);}
-    .note-content.visible{display:block;}
     .emoji{font-size:1.4rem;}
     footer{margin-top:40px;padding-top:24px;border-top:1px solid rgba(50,166,172,0.15);color:var(--neutre-clair);font-size:0.95rem;line-height:1.6;}
     footer p{margin:8px 0;}
@@ -152,7 +185,7 @@
           
           ${autres ? `<div class="ex autres-termes">Autres termes : ${autres}</div>` : ''}
 
-          <div class="note">
+          <div class="source-box">
             📚 <strong>Source:</strong> <em><span class="source-text ${isLongSource ? 'truncated' : ''}" id="${sourceId}">${source || 'Non spécifiée'}</span></em>
             ${isLongSource ? `<div class="source-toggle" onclick="
               const el = document.getElementById('${sourceId}');
@@ -165,13 +198,14 @@
                 btn.textContent = '▼ Lire la suite';
               }
             ">▼ Lire la suite</div>` : ''}
-            ${hasNotes ? `
-              <div class="note-toggle" onclick="this.nextElementSibling.classList.toggle('visible')">
-                ℹ️ Voir la note
-              </div>
-              <div class="note-content">${notes}</div>
-            ` : ''}
           </div>
+
+          ${hasNotes ? `
+            <div class="note-icon" onclick="this.nextElementSibling.classList.toggle('visible')" title="Note supplémentaire">
+              💡
+            </div>
+            <div class="note-content">${notes}</div>
+          ` : ''}
         `;
         container.appendChild(card);
       });
