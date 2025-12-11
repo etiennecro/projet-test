@@ -57,6 +57,26 @@
       font-size: 0.85rem;
       font-style: italic;
     }
+    .source-text {
+      display: inline;
+    }
+    .source-text.truncated {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .source-toggle {
+      margin-top: 8px;
+      color: var(--accent);
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+      display: inline-block;
+    }
+    .source-toggle:hover {
+      color: var(--secondaire);
+    }
     /* ———————————————————————————————— */
 
     .note{font-size:0.9rem;color:rgba(246,248,244,0.75);background:rgba(50,166,172,0.1);padding:10px;border-radius:6px;margin-top:10px;line-height:1.5;}
@@ -112,6 +132,8 @@
         const hasNotes = notes && notes.trim().length > 0;
         const isLongDef = def.length > 215;
         const defId = 'def-' + Math.random().toString(36).substr(2, 9);
+        const sourceId = 'source-' + Math.random().toString(36).substr(2, 9);
+        const isLongSource = source && source.length > 100;
         
         card.innerHTML = `
           <div class="word"><span class="emoji">💊</span><span>${mot}</span></div>
@@ -131,7 +153,18 @@
           ${autres ? `<div class="ex autres-termes">Autres termes : ${autres}</div>` : ''}
 
           <div class="note">
-            📚 <strong>Source:</strong> <em>${source || 'Non spécifiée'}</em>
+            📚 <strong>Source:</strong> <em><span class="source-text ${isLongSource ? 'truncated' : ''}" id="${sourceId}">${source || 'Non spécifiée'}</span></em>
+            ${isLongSource ? `<div class="source-toggle" onclick="
+              const el = document.getElementById('${sourceId}');
+              const btn = this;
+              if(el.classList.contains('truncated')) {
+                el.classList.remove('truncated');
+                btn.textContent = '▲ Réduire';
+              } else {
+                el.classList.add('truncated');
+                btn.textContent = '▼ Lire la suite';
+              }
+            ">▼ Lire la suite</div>` : ''}
             ${hasNotes ? `
               <div class="note-toggle" onclick="this.nextElementSibling.classList.toggle('visible')">
                 ℹ️ Voir la note
