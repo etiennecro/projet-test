@@ -68,17 +68,35 @@
     .emoji{font-size:1.4rem;}
     footer{margin-top:40px;padding-top:24px;border-top:1px solid rgba(50,166,172,0.15);color:var(--neutre-clair);font-size:0.95rem;line-height:1.6;}
     footer p{margin:8px 0;}
-    
-    /* — Thème clair — */
-    body.light { background-color: #f6f8f4; color: #1e2a2a; }
-    body.light input[type="search"], body.light select { background: rgba(0,122,132,0.05); color: #1e2a2a; border:1px solid rgba(0,122,132,0.2);}
+
+    /* — Thème clair amélioré — */
+    body.light {
+      background-color: #f6f8f4;
+      color: #1e2a2a;
+    }
+    body.light input[type="search"], body.light select {
+      background: #ffffff;
+      color: #1e2a2a;
+      border:1px solid rgba(0,122,132,0.3);
+    }
+    body.light input::placeholder {
+      color: rgba(30,42,42,0.5);
+    }
+    body.light .lead, body.light footer p { color: #1e2a2a; }
     body.light button { background: #f8c137; color: #1e2a2a; }
-    body.light .card { background: linear-gradient(180deg, rgba(50,166,172,0.05), rgba(50,166,172,0.02)); border:1px solid rgba(0,122,132,0.2); color: #1e2a2a; }
+    body.light .card { 
+      background: #ffffff; 
+      border:1px solid rgba(0,122,132,0.2); 
+      color: #1e2a2a; 
+    }
     body.light .word { color: #007A84; }
     body.light .pos { color: #1e2a2a; background: rgba(248,193,55,0.2); border:1px solid rgba(248,193,55,0.3); }
     body.light .def, body.light .ex, body.light .note-content, body.light .source-box { color: #1e2a2a; }
     body.light .badge { color: #007A84; background: rgba(50,166,172,0.1); border:1px solid rgba(50,166,172,0.2); }
-    
+    body.light .def-toggle, body.light .source-toggle, body.light .note-icon { color: #d18f00; }
+    body.light .note-content { background: rgba(248,193,55,0.05); }
+    body.light .source-box { background: rgba(248,193,55,0.05); }
+
     @media (max-width:768px){
       h1{font-size:1.5rem;}
       .controls{flex-direction:column;}
