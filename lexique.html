@@ -55,6 +55,13 @@
     .note strong { font-style: italic; font-weight: 700; }
     .note em { font-style: italic; }
     .autres-termes { font-size: 0.85rem; font-style: italic; }
+
+    /* 📌 Correction : empêcher les sources longues de déborder */
+    .source-box, .source-text {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
     .source-box { font-size: 0.85rem; color: rgba(246,248,244,0.85); background: rgba(0,122,132,0.15); padding: 10px; border-radius: 6px; margin-top: auto; padding-top: 16px; line-height: 1.5; border: 1px solid rgba(50,166,172,0.2); }
     .source-text { display: inline; }
     .source-text.truncated { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
