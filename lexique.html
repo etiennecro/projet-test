@@ -152,7 +152,7 @@
         const isLongDef = def.length > 215;
         const defId = 'def-' + Math.random().toString(36).substr(2, 9);
         const sourceId = 'source-' + Math.random().toString(36).substr(2, 9);
-        const isLongSource = source && source.length > 64;
+        const isLongSource = source && source.length > 100;
         const emoji = emojis[index % emojis.length];
 
         card.innerHTML = `
