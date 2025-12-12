@@ -48,21 +48,21 @@
     .def{margin:10px 0;color:var(--neutre-clair);line-height:1.6;font-size:0.95rem;text-align:justify;}
     .def.truncated{max-height:4.8em;overflow:hidden;position:relative;}
     .def.truncated::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1.5em;background:linear-gradient(to bottom, transparent, rgba(30,42,42,0.9));}
-    .def-toggle{margin-top:8px;color:var(--accent);cursor:pointer;font-size:0.85rem;transition:all 0.2s ease;display:inline-block;}
+    .def-toggle{margin-top:8px;margin-bottom:12px;color:var(--accent);cursor:pointer;font-size:0.85rem;transition:all 0.2s ease;display:inline-block;}
     .def-toggle:hover{color:var(--secondaire);}
-    .ex{margin:10px 0;color:rgba(246,248,244,0.85);font-size:0.95rem;padding-left:12px;border-left:3px solid var(--accent);}
+    .ex{margin:16px 0 12px 0;color:rgba(246,248,244,0.85);font-size:0.95rem;padding-left:12px;border-left:3px solid var(--accent);}
 
     .note strong { font-style: italic; font-weight: 700; }
     .note em { font-style: italic; }
     .autres-termes { font-size: 0.85rem; font-style: italic; }
-    .source-box { font-size: 0.85rem; color: rgba(246,248,244,0.75); background: rgba(50,166,172,0.1); padding: 10px; border-radius: 6px; margin-top: auto; line-height: 1.5; }
+    .source-box { font-size: 0.85rem; color: rgba(246,248,244,0.75); background: rgba(50,166,172,0.1); padding: 10px; border-radius: 6px; margin-top: 16px; line-height: 1.5; }
     .source-text { display: inline; }
     .source-text.truncated { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
     .source-toggle { margin-top: 8px; color: var(--accent); cursor: pointer; font-size: 0.85rem; transition: all 0.2s ease; display: inline-block; }
     .source-toggle:hover { color: var(--secondaire); }
-    .note-icon { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: rgba(248,193,55,0.2); border: 1px solid rgba(248,193,55,0.4); border-radius: 50%; cursor: pointer; margin-top: 8px; font-size: 1rem; transition: all 0.3s ease; }
+    .note-icon { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: rgba(248,193,55,0.2); border: 1px solid rgba(248,193,55,0.4); border-radius: 50%; cursor: pointer; margin-top: 16px; margin-bottom: 12px; font-size: 1rem; transition: all 0.3s ease; }
     .note-icon:hover { background: rgba(248,193,55,0.3); transform: scale(1.1); }
-    .note-content { display: none; margin-top: 8px; padding: 10px; background: rgba(50,166,172,0.08); border-radius: 6px; border-left: 3px solid var(--accent); color: rgba(246,248,244,0.85); font-size: 0.9rem; line-height: 1.6; }
+    .note-content { display: none; margin-top: 8px; margin-bottom: 12px; padding: 10px; background: rgba(50,166,172,0.08); border-radius: 6px; border-left: 3px solid var(--accent); color: rgba(246,248,244,0.85); font-size: 0.9rem; line-height: 1.6; }
     .note-content.visible { display: block; }
 
     .emoji{font-size:1.4rem;}
