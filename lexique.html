@@ -62,10 +62,10 @@
     }
 
     .source-box { font-size: 0.85rem; color: rgba(246,248,244,0.85); background: rgba(0,122,132,0.15); padding: 10px; border-radius: 6px; margin-top: auto; padding-top: 16px; line-height: 1.5; border: 1px solid rgba(50,166,172,0.2); }
+    .source-box.clickable { cursor: pointer; transition: all 0.2s ease; }
+    .source-box.clickable:hover { background: rgba(0,122,132,0.25); border-color: rgba(248,193,55,0.4); }
     .source-text { display: inline; }
     .source-text.truncated { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .source-toggle { margin-top: 8px; color: var(--accent); cursor: pointer; font-size: 0.85rem; transition: all 0.2s ease; display: inline-block; }
-    .source-toggle:hover { color: var(--secondaire); }
     .note-icon { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: rgba(248,193,55,0.2); border: 1px solid rgba(248,193,55,0.4); border-radius: 50%; cursor: pointer; margin-top: 10px; margin-bottom: 12px; font-size: 1rem; transition: all 0.3s ease; }
     .note-icon:hover { background: rgba(248,193,55,0.3); transform: scale(1.1); }
     .note-content { display: none; margin-top: 8px; margin-bottom: 12px; padding: 10px; background: rgba(50,166,172,0.08); border-radius: 6px; border-left: 3px solid var(--accent); color: rgba(246,248,244,0.85); font-size: 0.9rem; line-height: 1.6; }
@@ -99,10 +99,11 @@
     body.light .pos { color: #1e2a2a; background: rgba(248,193,55,0.2); border:1px solid rgba(248,193,55,0.3); }
     body.light .def, body.light .ex, body.light .note-content, body.light .source-box { color: #1e2a2a; }
     body.light .badge { color: #007A84; background: rgba(50,166,172,0.1); border:1px solid rgba(50,166,172,0.2); }
-    body.light .def-toggle, body.light .source-toggle, body.light .note-icon { color: #d18f00; }
-    body.light .def-toggle:hover, body.light .source-toggle:hover { color: #4c5270; }
+    body.light .def-toggle, body.light .note-icon { color: #d18f00; }
+    body.light .def-toggle:hover { color: #4c5270; }
     body.light .note-content { background: rgba(248,193,55,0.05); }
     body.light .source-box { background: rgba(0,122,132,0.08); color: #1e2a2a; border: 1px solid rgba(0,122,132,0.15); }
+    body.light .source-box.clickable:hover { background: rgba(0,122,132,0.18); border-color: #d18f00; }
     body.light .def.truncated::after { background: linear-gradient(to bottom, transparent, rgba(246,248,244,0.95)); }
     body.light .card:hover { border-color: #4c5270; box-shadow: 0 4px 16px rgba(76,82,112,0.15); }
 
@@ -186,19 +187,15 @@
           ` : ''}
 
           ${hasSource ? `
-          <div class="source-box">
+          <div class="source-box ${isLongSource ? 'clickable' : ''}" ${isLongSource ? `onclick="
+            const el = document.getElementById('${sourceId}');
+            if(el.classList.contains('truncated')) {
+              el.classList.remove('truncated');
+            } else {
+              el.classList.add('truncated');
+            }
+          "` : ''}>
             📚 <strong>Source:</strong> <em><span class="source-text ${isLongSource ? 'truncated' : ''}" id="${sourceId}">${source}</span></em>
-            ${isLongSource ? `<div class="source-toggle" onclick="
-              const el = document.getElementById('${sourceId}');
-              const btn = this;
-              if(el.classList.contains('truncated')) {
-                el.classList.remove('truncated');
-                btn.textContent = '▲ Réduire';
-              } else {
-                el.classList.add('truncated');
-                btn.textContent = '▼ Lire la suite';
-              }
-            ">▼ Lire la suite</div>` : ''}
           </div>
           ` : ''}
         `;
