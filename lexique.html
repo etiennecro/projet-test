@@ -206,10 +206,16 @@
 
     const search=document.getElementById('search');
     const reset=document.getElementById('reset');
+    
+    // Fonction pour retirer les accents et normaliser le texte
+    function normalizeText(text){
+      return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    }
+    
     function applyFilters(){
-      const q=search.value.toLowerCase();
+      const q=normalizeText(search.value);
       render(LEX.filter(([mot,def,source,autres,notes])=>{
-        return (mot+def+source+autres+notes).toLowerCase().includes(q);
+        return normalizeText(mot+def+source+autres+notes).includes(q);
       }));
     }
     search.addEventListener('input',applyFilters);
