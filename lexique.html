@@ -72,13 +72,17 @@
     .note-content.visible { display: block; }
 
     .emoji{font-size:1.4rem;}
-    footer{margin-top:40px;padding-top:24px;border-top:1px solid rgba(50,166,172,0.15);color:var(--neutre-clair);font-size:0.95rem;line-height:1.6;}
-    footer p{margin:8px 0;}
 
     /* — Thème clair amélioré — */
     body.light {
       background-color: #d4e8e8;
       color: #1e2a2a;
+    }
+    body.light h1 {
+      background: #4c5270;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     body.light input[type="search"], body.light select {
       background: #ffffff;
@@ -88,7 +92,7 @@
     body.light input::placeholder {
       color: rgba(30,42,42,0.5);
     }
-    body.light .lead, body.light footer p { color: #1e2a2a; }
+    body.light .lead { color: #1e2a2a; }
     body.light button { background: #f8c137; color: #1e2a2a; }
     body.light .card { 
       background: #ffffff; 
@@ -123,7 +127,6 @@
         <button id="theme-toggle">🌙 Thème sombre</button>
       </div>
       <h1>💊 Termes essentiels du domaine pharmaceutique</h1>
-      <p class="lead">Définitions et contextes d'usage destinés aux professionnels de la santé 🧪🩺</p>
     </header>
 
     <div class="controls">
@@ -134,11 +137,6 @@
     <main>
       <section id="lexicon" class="grid"></section>
     </main>
-
-    <footer>
-      <p>💡 Ce lexique a été conçu pour illustrer les termes techniques et conceptuels utilisés dans le champ pharmaceutique et biomédical.</p>
-      <p>📘 Auteur : Équipe pédagogique pharmaceutique — © 2025</p>
-    </footer>
   </div>
 
   <script src="termes.js"></script>
