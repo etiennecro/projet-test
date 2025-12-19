@@ -110,6 +110,9 @@
 
     .emoji{font-size:1.4rem;}
 
+    /* Message "Aucun résultat trouvé" */
+    .no-results { color: rgba(246,248,244,0.6); }
+
     /* ========================================
        THÈME CLAIR
        ======================================== */
@@ -150,6 +153,7 @@
     body.light .source-box.clickable:hover { background: rgba(0,122,132,0.18); border-color: #d18f00; }
     body.light .def.truncated::after { background: linear-gradient(to bottom, transparent, rgba(246,248,244,0.95)); }
     body.light .card:hover { border-color: #007A84; box-shadow: 0 4px 16px rgba(0,122,132,0.15); }
+    body.light .no-results { color: #1e2a2a; }
 
     /* ========================================
        RESPONSIVE - ÉCRANS MOBILES
@@ -200,7 +204,7 @@
       
       // Affichage d'un message si aucun résultat trouvé
       if(list.length === 0){
-        container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: rgba(246,248,244,0.6); padding: 40px;">Aucun résultat trouvé</p>';
+        container.innerHTML = '<p class="no-results" style="grid-column: 1/-1; text-align: center; padding: 40px;">Aucun résultat trouvé</p>';
         return;
       }
       
