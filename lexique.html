@@ -106,12 +106,12 @@
       border: 1px solid rgba(50,166,172,0.2); 
     }
     .source-box a {
-      color: var(--accent);
+      color: var(--secondaire);
       text-decoration: underline;
       transition: color 0.2s ease;
     }
     .source-box a:hover {
-      color: var(--secondaire);
+      color: var(--accent);
     }
     
     /* Icône de note avec effet d'interaction */
@@ -164,8 +164,8 @@
     body.light .def-toggle:hover { color: #4c5270; }
     body.light .note-content { background: rgba(248,193,55,0.05); }
     body.light .source-box { background: rgba(0,122,132,0.08); color: #1e2a2a; border: 1px solid rgba(0,122,132,0.15); }
-    body.light .source-box a { color: #d18f00; }
-    body.light .source-box a:hover { color: #007A84; }
+    body.light .source-box a { color: #007A84; }
+    body.light .source-box a:hover { color: #d18f00; }
     body.light .def.truncated::after { background: linear-gradient(to bottom, transparent, rgba(246,248,244,0.95)); }
     body.light .card:hover { border-color: #007A84; box-shadow: 0 4px 16px rgba(0,122,132,0.15); }
     body.light .no-results { color: #1e2a2a; }
@@ -242,7 +242,7 @@
         // Conversion des URLs en liens cliquables dans la source
         let sourceHTML = source;
         if(hasSource) {
-          sourceHTML = source.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+          sourceHTML = source.replace(/(https?:\/\/[^\s\]]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
         }
 
         // Construction du HTML de la carte
