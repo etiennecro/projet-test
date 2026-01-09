@@ -94,11 +94,17 @@
     /* ========================================
        SOURCES ET NOTES SUPPLÉMENTAIRES
        ======================================== */
-    .source-box { font-size: 0.85rem; color: rgba(246,248,244,0.85); background: rgba(20,32,32,0.5); padding: 10px; border-radius: 6px; margin-top: auto; padding-top: 16px; line-height: 1.5; border: 1px solid rgba(50,166,172,0.2); }
-    .source-box.clickable { cursor: pointer; transition: all 0.2s ease; }
-    .source-box.clickable:hover { background: rgba(25,37,37,0.65); border-color: rgba(248,193,55,0.4); }
-    .source-text { display: inline; }
-    .source-text.truncated { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .source-box { 
+      font-size: 0.85rem; 
+      color: rgba(246,248,244,0.85); 
+      background: rgba(20,32,32,0.5); 
+      padding: 10px; 
+      border-radius: 6px; 
+      margin-top: auto; 
+      padding-top: 16px; 
+      line-height: 1.5; 
+      border: 1px solid rgba(50,166,172,0.2); 
+    }
     
     /* Icône de note avec effet d'interaction */
     .note-icon { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: rgba(248,193,55,0.2); border: 1px solid rgba(248,193,55,0.4); border-radius: 50%; cursor: pointer; margin-top: 10px; margin-bottom: 12px; font-size: 1rem; transition: all 0.3s ease; }
@@ -150,7 +156,6 @@
     body.light .def-toggle:hover { color: #4c5270; }
     body.light .note-content { background: rgba(248,193,55,0.05); }
     body.light .source-box { background: rgba(0,122,132,0.08); color: #1e2a2a; border: 1px solid rgba(0,122,132,0.15); }
-    body.light .source-box.clickable:hover { background: rgba(0,122,132,0.18); border-color: #d18f00; }
     body.light .def.truncated::after { background: linear-gradient(to bottom, transparent, rgba(246,248,244,0.95)); }
     body.light .card:hover { border-color: #007A84; box-shadow: 0 4px 16px rgba(0,122,132,0.15); }
     body.light .no-results { color: #1e2a2a; }
@@ -220,8 +225,6 @@
         
         // Génération d'identifiants uniques pour les éléments interactifs
         const defId = 'def-' + Math.random().toString(36).substr(2, 9);
-        const sourceId = 'source-' + Math.random().toString(36).substr(2, 9);
-        const isLongSource = source && source.length > 100;
         
         // Attribution d'un emoji cyclique basé sur l'index
         const emoji = emojis[index % emojis.length];
@@ -252,15 +255,8 @@
           ` : ''}
 
           ${hasSource ? `
-          <div class="source-box ${isLongSource ? 'clickable' : ''}" ${isLongSource ? `onclick="
-            const el = document.getElementById('${sourceId}');
-            if(el.classList.contains('truncated')) {
-              el.classList.remove('truncated');
-            } else {
-              el.classList.add('truncated');
-            }
-          "` : ''}>
-            📚 <strong>Source:</strong> <em><span class="source-text ${isLongSource ? 'truncated' : ''}" id="${sourceId}">${source}</span></em>
+          <div class="source-box">
+            📚 <strong>Source:</strong> <em><span class="source-text">${source}</span></em>
           </div>
           ` : ''}
         `;
